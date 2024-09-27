@@ -630,3 +630,77 @@ footer p {
 .social-media a:hover {
     opacity: 0.7;
 }
+
+/* 既存のスタイルを維持しつつ、カルーセル用のスタイルを追加 */
+
+.pillow-container {
+    position: relative;
+    width: 300px; /* 必要に応じて調整 */
+    height: 200px; /* 必要に応じて調整 */
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* 3枚の画像に合わせた回転角度 */
+.a {
+    transform: rotateY(0deg) translateZ(150px);
+}
+.b {
+    transform: rotateY(120deg) translateZ(150px);
+}
+.c {
+    transform: rotateY(240deg) translateZ(150px);
+}
+
+.next, .prev {
+    color: #444;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.5em 1em;
+    cursor: pointer;
+    background: #CCC;
+    border-radius: 5px;
+    border-top: 1px solid #FFF;
+    box-shadow: 0 5px 0 #999;
+    transition: box-shadow 0.1s, top 0.1s;
+    user-select: none;
+    z-index: 10;
+}
+
+.next:hover, .prev:hover { color: #000; }
+.next:active, .prev:active {
+    box-shadow: 0 1px 0 #999;
+}
+
+.next { right: 10px; }
+.prev { left: 10px; }

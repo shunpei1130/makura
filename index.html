@@ -42,10 +42,28 @@
             <section class="additional-content container">
                 <p class="text-xl" id="subTitle">無重力を超えた、夢重力の世界へ</p>
                 <div class="pillow-container">
-                    <img src="sample.png" alt="夢重力枕" class="pillow-image">
+                    <div class="carousel-container">
+                        <div class="carousel">
+                            <div class="item a">
+                                <img src="sample1.png" alt="夢重力枕 1" class="pillow-image">
+                            </div>
+                            <div class="item b">
+                                <img src="sample2.png" alt="夢重力枕 2" class="pillow-image">
+                            </div>
+                            <div class="item c">
+                                <img src="sample3.png" alt="夢重力枕 3" class="pillow-image">
+                            </div>
+                        </div>
+                        <div class="next">Next</div>
+                        <div class="prev">Prev</div>
+                    </div>
                 </div>
                 <button class="cta-button">今すぐ購入</button>
             </section>
+            
+
+
+            <!-- 追加セクション: 夢重力マクラの特徴 -->
             <section class="features container" id="features">
                 <h3 class="text-3xl">夢重力マクラの特徴</h3>
                 <div class="feature-grid">
@@ -159,5 +177,32 @@
         </div>
     </div>
     <script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var carousel = $(".carousel"),
+            currdeg  = 0,
+            rotateDegree = 120; // 360 / 3 = 120度
+    
+        $(".next").on("click", { d: "n" }, rotate);
+        $(".prev").on("click", { d: "p" }, rotate);
+    
+        function rotate(e){
+            if(e.data.d == "n"){
+                currdeg -= rotateDegree;
+            }
+            if(e.data.d == "p"){
+                currdeg += rotateDegree;
+            }
+            carousel.css({
+                "-webkit-transform": "rotateY("+currdeg+"deg)",
+                "-moz-transform": "rotateY("+currdeg+"deg)",
+                "-o-transform": "rotateY("+currdeg+"deg)",
+                "transform": "rotateY("+currdeg+"deg)"
+            });
+        }
+    });
+    </script>
+    
 </body>
 </html>
