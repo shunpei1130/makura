@@ -1,0 +1,632 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 最前面に表示するためのスタイルを追加 */
+/* 既存のCSSに追加 */
+
+/* フッター全体を前面に表示 */
+footer {
+    position: relative; /* スタッキングコンテキストを作成 */
+    z-index: 10;        /* 他の要素よりも高い値を設定 */
+}
+
+/* フッター内のpタグを最前面に表示 */
+footer p {
+    position: relative; /* スタッキングコンテキストを利用 */
+    z-index: 20;        /* フッター内で最前面に表示 */
+    padding-bottom: 45px;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: white;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('back.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.25);
+    z-index: -1;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+/* フォントファミリーの定義 */
+@font-face {
+    font-family: 'MyFont';
+    src: url('kaiso_up/Kaisotai-Next-UP-B.ttf') format('woff2'),
+         url('kaiso_up/Kaisotai-Next-UP-B.otf') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('kaiso_up/Kaisotai-Next-UP-B.ttf') format('woff2'),
+         url('kaiso_up/Kaisotai-Next-UP-B.otf') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 新しいフォントクラス */
+.myfont {
+    font-family: 'MyFont', sans-serif;
+}
+
+.text-4xl {
+    font-size: 6rem; /* フォントサイズを大きく */
+    font-weight: bold;
+    margin-bottom: 1rem;
+    /* デフォルトフォントを使用するため、font-familyを削除 */
+}
+
+.text-5xl {
+    font-size: 2rem; /* フォントサイズを大きく */
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    /* デフォルトフォントを使用するため、font-familyを削除 */
+}
+
+.text-xl {
+    font-size: 1.5rem; /* フォントサイズを大きく */
+    margin-bottom: 2rem;
+}
+
+.pillow-container {
+    width: 20rem; /* 画像サイズを大きく */
+    height: 20rem;
+    margin: 5rem auto 3rem;
+    position: relative;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.pillow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button {
+    background-color: #9f7aea;
+    margin-top: 7%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem; /* フォントサイズを少し大きく */
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.cta-button:hover {
+    background-color: #805ad5;
+}
+
+.features {
+    padding: 4rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.text-3xl {
+    font-size: 2rem; /* フォントサイズを少し大きく */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background-color: rgba(107, 70, 193, 0.5);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature-card:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+.feature-card:nth-child(2) {
+    transition-delay: 0.4s;
+}
+
+.feature-card:nth-child(3) {
+    transition-delay: 0.6s;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-indicator {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    animation: bounce 1.5s infinite;
+    z-index: 1000; /* 他の要素よりも前面に表示 */
+}
+
+.scroll-indicator.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .text-4xl {
+        font-size: 3rem;
+    }
+    .text-5xl {
+        font-size: 2.5rem;
+    }
+    .text-xl {
+        font-size: 1.25rem;
+    }
+    .pillow-container {
+        width: 15rem;
+        height: 15rem;
+    }
+}
+
+/* 追加: subTitle の初期スタイル */
+#subTitle {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* 追加: subTitle が表示されるときのスタイル */
+#subTitle.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* タイピングアニメーション */
+
+/* カーソル（点滅） */
+.cursor {
+    display: inline-block;
+    width: 0.15em;
+    background-color: black;
+    margin-left: 2px;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+/* 「夢」を赤色かつ大きめに表示 */
+.highlight {
+    color: #d0a900;
+    font-size: 1.5em; /* 必要に応じて調整 */
+}
+
+/* カーソルの点滅アニメーション */
+@keyframes blink-caret {
+    from, to { background-color: transparent; }
+    50% { background-color: black; }
+}
+
+/* セクションが表示されるときのクラス */
+.visible {
+    align-items: center;
+    text-align: center;
+    opacity: 1;
+    transform: translateY(0);
+}
+/* =========================================
+   Navigation Bar
+========================================= */
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #007BFF;
+}
+
+/* =========================================
+   Responsive Design
+========================================= */
+
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.95);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        display: none;
+    }
+
+    .navbar ul.active {
+        display: flex;
+    }
+
+    .navbar li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .feature-grid,
+    .testimonial-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pillow-image,
+    .gallery-image {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-button,
+    .submit-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .navbar a {
+        font-size: 1rem;
+    }
+}
+
+/* =========================================
+   Additional Styles for Interactivity
+========================================= */
+
+/* Mobile Navigation Toggle (Optional) */
+.navbar .toggle-button {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.navbar .toggle-button div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .navbar .toggle-button {
+        display: block;
+    }
+}
+
+/* Active state for toggle button */
+.navbar .toggle-button.active .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.navbar .toggle-button.active .bar2 {
+    opacity: 0;
+}
+
+.navbar .toggle-button.active .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* =========================================
+   Testimonials Section
+========================================= */
+
+.testimonials {
+    padding: 60px 20px;
+}
+
+.testimonials h3 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+
+    background-color: rgba(107, 70, 193, 0.5);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.testimonial-author {
+    text-align: right;
+    font-weight: bold;
+}
+
+h3{
+    font-family: 'MyFont', sans-serif;
+}
+
+/* =========================================
+   About Us Section
+========================================= */
+
+.about-us {
+    padding: 60px 20px;
+}
+
+.about-us h3 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.about-us p {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.8;
+}
+
+/* =========================================
+   Gallery Section
+========================================= */
+
+.gallery {
+    padding: 60px 20px;
+}
+
+.gallery h3 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* =========================================
+   FAQ Section
+========================================= */
+
+.faq {
+    padding: 60px 20px;
+}
+
+.faq h3 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.faq-item {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    font-weight: bold;
+    color: #805ad5;
+    margin-bottom: 10px;
+}
+
+.faq-answer {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* =========================================
+   Contact Section
+========================================= */
+
+.contact {
+    padding: 60px 20px;
+}
+
+.contact h3 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.submit-button {
+    padding: 15px;
+    font-size: 1.1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+/* =========================================
+   Footer
+========================================= */
+
+footer {
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+}
+
+footer p {
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.social-media a {
+    margin: 0 10px;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.social-media img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+}
+
+.social-media a:hover {
+    opacity: 0.7;
+}
