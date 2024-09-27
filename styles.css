@@ -723,12 +723,13 @@ footer p {
 .cta-button {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #007BFF;
+    background-color: #805ad5;
     color: #FFF;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    min-width: 60%;
 }
 
 .cta-button:hover {
