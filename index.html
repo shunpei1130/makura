@@ -38,7 +38,6 @@
                 </h2>
             </section>
 
-            <!-- 初回表示後に現れるコンテンツ -->
             <section class="additional-content container">
                 <p class="text-xl" id="subTitle">無重力を超えた、夢重力の世界へ</p>
                 <div class="pillow-container">
@@ -54,12 +53,14 @@
                                 <img src="sample3.png" alt="夢重力枕 3" class="pillow-image">
                             </div>
                         </div>
-                        <div class="next">Next</div>
-                        <div class="prev">Prev</div>
+                        <div class="next">＞</div>
+                        <div class="prev">＜</div>
                     </div>
                 </div>
                 <button class="cta-button">今すぐ購入</button>
             </section>
+            
+            
             
 
 
@@ -182,7 +183,10 @@
     $(document).ready(function(){
         var carousel = $(".carousel"),
             currdeg  = 0,
-            rotateDegree = 120; // 360 / 3 = 120度
+            rotateDegree = 120, // 360 / 3 = 120度
+            isDragging = false,
+            startX,
+            currentDeg = 0;
     
         $(".next").on("click", { d: "n" }, rotate);
         $(".prev").on("click", { d: "p" }, rotate);
@@ -201,8 +205,49 @@
                 "transform": "rotateY("+currdeg+"deg)"
             });
         }
+    
+        // ドラッグによる回転
+        $(".carousel-container").on("mousedown touchstart", function(e){
+            isDragging = true;
+            startX = e.pageX || e.originalEvent.touches[0].pageX;
+        });
+    
+        $(document).on("mousemove touchmove", function(e){
+            if(isDragging){
+                var currentX = e.pageX || e.originalEvent.touches[0].pageX;
+                var deltaX = currentX - startX;
+                // 回転角度の計算
+                var rotationChange = deltaX / 2; // 感度調整
+                carousel.css({
+                    "transform": "rotateY("+(currdeg + rotationChange)+"deg)"
+                });
+            }
+        });
+    
+        $(document).on("mouseup touchend", function(e){
+            if(isDragging){
+                isDragging = false;
+                var endX = e.pageX || (e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : 0);
+                var deltaX = endX - startX;
+                if(deltaX > 50){
+                    // 右へ回転
+                    currdeg += rotateDegree;
+                }
+                else if(deltaX < -50){
+                    // 左へ回転
+                    currdeg -= rotateDegree;
+                }
+                carousel.css({
+                    "-webkit-transform": "rotateY("+currdeg+"deg)",
+                    "-moz-transform": "rotateY("+currdeg+"deg)",
+                    "-o-transform": "rotateY("+currdeg+"deg)",
+                    "transform": "rotateY("+currdeg+"deg)"
+                });
+            }
+        });
     });
     </script>
+    
     
 </body>
 </html>

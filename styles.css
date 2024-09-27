@@ -633,11 +633,22 @@ footer p {
 
 /* 既存のスタイルを維持しつつ、カルーセル用のスタイルを追加 */
 
+.additional-content.container {
+    /* 既存のスタイル */
+    padding: 20px;
+    text-align: center;
+}
+
+.text-xl {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
 .pillow-container {
     position: relative;
     width: 300px; /* 必要に応じて調整 */
-    height: 200px; /* 必要に応じて調整 */
-    margin: 0 auto;
+    height: 300px; /* 必要に応じて調整 */
+    margin: 0 auto 20px auto;
     perspective: 1000px;
 }
 
@@ -681,20 +692,23 @@ footer p {
     transform: rotateY(240deg) translateZ(150px);
 }
 
+/* NextおよびPrevボタンのスタイル調整 */
 .next, .prev {
-    color: #444;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     padding: 0.5em 1em;
     cursor: pointer;
-    background: #CCC;
-    border-radius: 5px;
-    border-top: 1px solid #FFF;
-    box-shadow: 0 5px 0 #999;
-    transition: box-shadow 0.1s, top 0.1s;
+    border-radius: 50%;
+    transition: box-shadow 0.1s, top 0.1s, transform 0.3s;
     user-select: none;
     z-index: 10;
+    width: 50px; /* ボタンの幅を広げる */
+    height: 50px; /* ボタンの高さを広げる */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
 }
 
 .next:hover, .prev:hover { color: #000; }
@@ -702,5 +716,43 @@ footer p {
     box-shadow: 0 1px 0 #999;
 }
 
-.next { right: 10px; }
-.prev { left: 10px; }
+.prev { 
+    left: -60px; /* 左側に広げる */
+}
+
+.cta-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007BFF;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .pillow-container {
+        width: 250px;
+        height: 250px;
+    }
+   
+}
+
+@media (max-width: 480px) {
+    .pillow-container {
+        width: 200px;
+        height: 200px;
+    }
+    .next { 
+        right: -70px; /* スクリーンサイズに合わせて調整 */
+    }
+    .prev { 
+        left: -70px; /* スクリーンサイズに合わせて調整 */
+    }
+}
