@@ -28,6 +28,10 @@ body {
     position: relative;
     overflow-x: hidden;
 }
+/* 既存のCSSに追加 */
+
+
+
 
 .background-image {
     position: fixed;
@@ -41,6 +45,7 @@ body {
     background-repeat: no-repeat;
     filter: brightness(0.25);
     z-index: -1;
+    transition: background-image 0.5s ease-in-out; /* 背景画像の切り替えにトランジションを追加 */
 }
 
 .content-wrapper {
@@ -127,21 +132,6 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.cta-button {
-    background-color: #9f7aea;
-    margin-top: 7%;
-    color: white;
-    font-weight: bold;
-    font-size: 1.25rem; /* フォントサイズを少し大きく */
-    padding: 0.75rem 2rem;
-    border: none;
-    min-width: 50%;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
-    opacity: 0;
-    transform: translateY(20px);
-}
 
 .cta-button:hover {
     background-color: #805ad5;
@@ -172,7 +162,6 @@ body {
     padding: 1.5rem;
     border-radius: 0.5rem;
     backdrop-filter: blur(10px);
-    opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
@@ -366,16 +355,18 @@ footer {
 @media (max-width: 480px) {
     .cta-button,
     .submit-button {
-        width: 100%;
-        padding: 12px;
-        font-size: 1rem;
+        width: 40%;
     }
 
     .navbar a {
         font-size: 1rem;
     }
 }
-
+.item p {
+    /* ここにスタイルを記述 */
+    padding-bottom: 10%;
+  }
+  
 /* =========================================
    Additional Styles for Interactivity
 ========================================= */
@@ -656,6 +647,7 @@ footer p {
 
 .carousel-container {
     position: relative;
+    perspective: 1000px;
     width: 100%;
     height: 100%;
 }
@@ -672,9 +664,17 @@ footer p {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
+    backface-visibility: visible;
     border-radius: 10px;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
 }
+
+/* activeクラスが付与されたアイテムを通常の不透明度にする */
+.item.active {
+    opacity: 1;
+}
+
 
 .item img {
     width: 100%;
@@ -693,11 +693,27 @@ footer p {
 .c {
     transform: rotateY(240deg) translateZ(150px);
 }
+.pillow-image {
+    animation: float 3s ease-in-out infinite;  /* アニメーションの適用 */
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0);  /* 初期位置 */
+    }
+    50% {
+      transform: translateY(-10px);  /* 上に10px移動 */
+    }
+    100% {
+      transform: translateY(0);  /* 初期位置に戻る */
+    }
+  }
+  
 
 /* NextおよびPrevボタンのスタイル調整 */
 .next, .prev {
     position: absolute;
-    top: 50%;
+    top: 70%;
     transform: translateY(-50%);
     padding: 0.5em 1em;
     cursor: pointer;
@@ -719,10 +735,13 @@ footer p {
 }
 
 .prev { 
-    left: -60px; /* 左側に広げる */
+    left: -60%; /* 左側に広げる */
 }
-
+.next { 
+    right: -60%; /* 左側に広げる */
+}
 .cta-button {
+    margin-top: 15%;
     padding: 10px 20px;
     font-size: 1em;
     background-color: #805ad5;
@@ -731,7 +750,7 @@ footer p {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    min-width: 60%;
+    min-width: 20%;
 }
 
 .cta-button:hover {

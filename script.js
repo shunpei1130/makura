@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 背景画像を管理する配列
+    const backgroundImages = [
+        { image: 'images/back1.png', start: 0, end: 1200 },  // 601pxから1200pxまで
+        { image: 'images/back2.png', start: 1201, end: 2400 }, // 1201pxから1800pxまで
+        { image: 'images/back3.png', start: 2401, end: Infinity } // 2401px以上
+    ];
+
+    const backgroundDiv = $('.background-image');
+    let currentBackground = '';
+
+    // スクロール時に背景画像を更新する関数
+    function updateBackground() {
+        const scrollPosition = $(window).scrollTop();
+        
+        // どの背景画像を適用するか判定
+        for (let bg of backgroundImages) {
+            if (scrollPosition >= bg.start && scrollPosition <= bg.end) {
+                if (currentBackground !== bg.image) {
+                    backgroundDiv.css('background-image', `url('${bg.image}')`);
+                    currentBackground = bg.image;
+                }
+                break;
+            }
+        }
+    }
+
+    // 初期ロード時に背景を設定
+    updateBackground();
+
+    // スクロールイベントリスナーを追加（スロットリングでパフォーマンス向上）
+    $(window).on('scroll', throttle(updateBackground, 200));
+
+    // パフォーマンス向上のためのスロットリング関数
+    function throttle(fn, wait) {
+        let time = Date.now();
+        return function() {
+            if ((time + wait - Date.now()) < 0) {
+                fn();
+                time = Date.now();
+            }
+        }
+    }
     /**
      * タイピングアニメーションを実行する関数
      * @param {Object} config - アニメーション設定

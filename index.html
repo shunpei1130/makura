@@ -39,18 +39,21 @@
             </section>
 
             <section class="additional-content container">
-                <p class="text-xl" id="subTitle">横向き夢重力マクラ</p>
+                <h3 class="text-3xl">ギャラリー</h3>
                 <div class="pillow-container">
                     <div class="carousel-container">
                         <div class="carousel">
                             <div class="item a">
-                                <img src="sample1.png" alt="夢重力枕 1" class="pillow-image">
+                                <p>無重力マクラ 横向き</p>
+                                <img src="yoko.png" alt="夢重力枕 1" class="pillow-image">
                             </div>
                             <div class="item b">
-                                <img src="sample2.png" alt="夢重力枕 2" class="pillow-image">
+                                <p>無重力マクラ 縦向き</p>
+                                <img src="tate.png" alt="夢重力枕 2" class="pillow-image">
                             </div>
                             <div class="item c">
-                                <img src="sample3.png" alt="夢重力枕 3" class="pillow-image">
+                                <p>無重力マクラ 縦向き</p>
+                                <img src="tate1.png" alt="夢重力枕 3" class="pillow-image">
                             </div>
                         </div>
                         <div class="next">＞</div>
@@ -60,7 +63,17 @@
                 <button class="cta-button">今すぐ購入</button>
             </section>
             
-            
+            <!-- タイピングアニメーション用セクションの追加 -->
+            <section class="typing-section container" id="typing-section">
+                <h3 class="text-3xl">『夢重力枕（Zero gravity）』は、柔らかく衛生的な
+                    新素材TPE（ゲル構造）を採用した新しい寝具素材です。ハニカムパターンのグリッド
+                    と低刺激性換気ラテックスにより、優れた弾力性と柔軟性を実現しています。
+                    これにより、従来のウレタンフォームやファイバーに代わる、圧力分散と無重力のような寝心地を提供します。
+                    抜群の通気性と吸湿発散性により、頭部の熱を抑え、寝返りを減らすことができます。
+                    仰向けや横向きなど様々な睡眠姿勢に対応し、180度回転で2段階の高さ調整が可能です。強い反発力を持つ、おすすめの枕です。
+                </h3>
+                <p id="typing-text" class="typing-text"></p>
+            </section>
             
 
 
@@ -88,6 +101,8 @@
                     </div>
                 </div>
             </section>
+
+            
             <!-- 追加セクション: お客様の声 -->
             <section class="testimonials container" id="testimonials">
                 <h3 class="text-3xl">お客様の声</h3>
@@ -111,17 +126,9 @@
             <section class="about-us container" id="about">
                 <h3 class="text-3xl">私たちについて</h3>
                 <p>夢重力は、快適な睡眠を追求するために設立された企業です。私たちは科学的な研究に基づき、最高品質のマクラを提供しています。お客様一人ひとりの健康と快適な睡眠をサポートすることを使命としています。</p>
+                <br><p>ここで証拠の画像など入れる</p>
             </section>
 
-            <!-- 追加セクション: ギャラリー -->
-            <section class="gallery container" id="gallery">
-                <h3 class="text-3xl">ギャラリー</h3>
-                <div class="gallery-grid">
-                    <img src="ga1.png" alt="夢重力枕 1" class="gallery-image">
-                    <img src="ga2.png" alt="夢重力枕 2" class="gallery-image">
-                    <img src="ga3.png" alt="夢重力枕 3" class="gallery-image">
-                </div>
-            </section>
 
             <!-- 追加セクション: よくある質問 -->
             <section class="faq container" id="faq">
@@ -167,7 +174,7 @@
                 <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
                 <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
             </div>
-            <p>&copy; 2023 夢重力. All rights reserved.</p>
+            <p>&copy; 2024 夢重力. All rights reserved.</p>
         </footer>
 
         <div class="scroll-indicator">
@@ -179,23 +186,72 @@
     <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function(){
-        var carousel = $(".carousel"),
-            currdeg  = 0,
-            rotateDegree = 120, // 360 / 3 = 120度
-            isDragging = false,
-            startX,
-            currentDeg = 0;
-    
-        $(".next").on("click", { d: "n" }, rotate);
-        $(".prev").on("click", { d: "p" }, rotate);
-    
-        function rotate(e){
-            if(e.data.d == "n"){
-                currdeg -= rotateDegree;
-            }
-            if(e.data.d == "p"){
+   $(document).ready(function(){
+    var carousel = $(".carousel"),
+        currdeg  = 0,
+        rotateDegree = 120, // 360 / 3 = 120度
+        isDragging = false,
+        startX,
+        totalItems = $(".item").length; // アイテムの総数を取得
+
+    // アイテムをキャッシュ
+    var items = $(".item");
+
+    $(".next").on("click", { d: "n" }, function(e){
+        rotate(e);
+        updateActiveClasses();
+    });
+    $(".prev").on("click", { d: "p" }, function(e){
+        rotate(e);
+        updateActiveClasses();
+    });
+
+    function rotate(e){
+        if(e.data.d == "n"){
+            currdeg -= rotateDegree;
+        }
+        if(e.data.d == "p"){
+            currdeg += rotateDegree;
+        }
+        carousel.css({
+            "-webkit-transform": "rotateY("+currdeg+"deg)",
+            "-moz-transform": "rotateY("+currdeg+"deg)",
+            "-o-transform": "rotateY("+currdeg+"deg)",
+            "transform": "rotateY("+currdeg+"deg)"
+        });
+    }
+
+    // ドラッグによる回転
+    $(".carousel-container").on("mousedown touchstart", function(e){
+        isDragging = true;
+        startX = e.pageX || e.originalEvent.touches[0].pageX;
+    });
+
+    $(document).on("mousemove touchmove", function(e){
+        if(isDragging){
+            var currentX = e.pageX || e.originalEvent.touches[0].pageX;
+            var deltaX = currentX - startX;
+            // 回転角度の計算
+            var rotationChange = deltaX / 2; // 感度調整
+            carousel.css({
+                "transform": "rotateY("+(currdeg + rotationChange)+"deg)"
+            });
+        }
+    });
+
+    // マウスアップまたはタッチ終了時の処理
+    $(document).on("mouseup touchend", function(e){
+        if(isDragging){
+            isDragging = false;
+            var endX = e.pageX || (e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : 0);
+            var deltaX = endX - startX;
+            if(deltaX > 50){
+                // 右へ回転
                 currdeg += rotateDegree;
+            }
+            else if(deltaX < -50){
+                // 左へ回転
+                currdeg -= rotateDegree;
             }
             carousel.css({
                 "-webkit-transform": "rotateY("+currdeg+"deg)",
@@ -203,48 +259,35 @@
                 "-o-transform": "rotateY("+currdeg+"deg)",
                 "transform": "rotateY("+currdeg+"deg)"
             });
+            updateActiveClasses();
         }
-    
-        // ドラッグによる回転
-        $(".carousel-container").on("mousedown touchstart", function(e){
-            isDragging = true;
-            startX = e.pageX || e.originalEvent.touches[0].pageX;
-        });
-    
-        $(document).on("mousemove touchmove", function(e){
-            if(isDragging){
-                var currentX = e.pageX || e.originalEvent.touches[0].pageX;
-                var deltaX = currentX - startX;
-                // 回転角度の計算
-                var rotationChange = deltaX / 2; // 感度調整
-                carousel.css({
-                    "transform": "rotateY("+(currdeg + rotationChange)+"deg)"
-                });
-            }
-        });
-    
-        $(document).on("mouseup touchend", function(e){
-            if(isDragging){
-                isDragging = false;
-                var endX = e.pageX || (e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : 0);
-                var deltaX = endX - startX;
-                if(deltaX > 50){
-                    // 右へ回転
-                    currdeg += rotateDegree;
-                }
-                else if(deltaX < -50){
-                    // 左へ回転
-                    currdeg -= rotateDegree;
-                }
-                carousel.css({
-                    "-webkit-transform": "rotateY("+currdeg+"deg)",
-                    "-moz-transform": "rotateY("+currdeg+"deg)",
-                    "-o-transform": "rotateY("+currdeg+"deg)",
-                    "transform": "rotateY("+currdeg+"deg)"
-                });
-            }
-        });
     });
+
+    // アクティブなアイテムを更新する関数
+    function updateActiveClasses(){
+        // 現在の回転角度を正規化（0〜360度）
+        var normalizedDeg = ((currdeg % 360) + 360) % 360;
+        // 120度ごとの位置を計算
+        // 例: normalizedDeg = 0 → .a, 120 → .b, 240 → .c
+        // 多少の誤差を許容するため±15度の範囲を設定
+        var tolerance = 15;
+        items.removeClass('active');
+
+        if ( (normalizedDeg >= (360 - tolerance)) || (normalizedDeg < tolerance) ) {
+            $(".item.a").addClass('active');
+        }
+        else if (normalizedDeg >= (240 - tolerance) && normalizedDeg < (240 + tolerance)) {
+            $(".item.b").addClass('active');
+        }
+        else if (normalizedDeg >= (120 - tolerance) && normalizedDeg < (120 + tolerance)) {
+            $(".item.c").addClass('active');
+        }
+    }
+
+    // 初期状態でアクティブクラスを設定
+    updateActiveClasses();
+});
+
     </script>
     
     
