@@ -1,4 +1,136 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const typingTextElement = document.getElementById('typing-text');
+    const originalText = "『夢重力枕（Zero gravity）』は、柔らかく衛生的な 新素材TPE（ゲル構造）を採用した新しい寝具素材です。<br>ハニカムパターンのグリッド と低刺激性換気ラテックスにより、優れた弾力性と柔軟性を実現しています。<br> これにより、従来のウレタンフォームやファイバーに代わる、圧力分散と無重力のような寝心地を提供します。 <br>抜群の通気性と吸湿発散性により、頭部の熱を抑え、寝返りを減らすことができます。 <br>仰向けや横向きなど様々な睡眠姿勢に対応し、180度回転で2段階の高さ調整が可能です。<br>強い反発力を持つ、おすすめの枕です。"; // 実際のテキストに置き換え
+    let displayedText = '';
+    let previousLength = 0; // 前回の表示文字数を保存
+    let zeroCount = 0; // previousLengthが0であった回数をカウント
+    let increaseAmount = 2; // デフォルトの増加量
+
+    // スクロールを無効にする関数
+    function disableScroll() {
+        console.log('disableScroll');
+        document.body.style.overflowY = 'hidden'; // ボディのオーバーフローを隠す
+
+        // スクロールを無効にするイベントリスナーを追加
+        window.addEventListener('wheel', preventScroll, { passive: false });
+        window.addEventListener('touchmove', preventScroll, { passive: false });
+    }
+
+    // スクロールを有効にする関数
+    function enableScroll() {
+        console.log('enableScroll');
+        document.body.style.overflowY = ''; // オーバーフローを元に戻す
+        isScrollEnabled = true; // スクロール有効フラグを立てる
+
+        // スクロールを有効にするためのイベントリスナーを削除
+        window.removeEventListener('wheel', preventScroll);
+        window.removeEventListener('touchmove', preventScroll);
+        window.addEventListener('wheel', preventScroll, { passive: true });
+        window.addEventListener('touchmove', preventScroll, { passive: true });
+    }
+
+    // スクロールを無効にするための関数
+    function preventScroll(event) {
+        console.log('preventScroll');
+        event.preventDefault(); // スクロールイベントを無効化
+    }
+
+    // スクロールおよびスワイプ処理
+    function handleScrollOrSwipe(event) {
+        console.log('handleScrollOrSwipe');
+        // 対象のテキストが一致するか確認
+        if (typingTextElement.innerHTML === originalText) {
+            enableScroll(); // すでに表示されている場合、スクロールを有効に
+            return; // 処理を終了して何もしない
+        }
+
+        const sectionRect = typingTextElement.getBoundingClientRect();
+        const scrollLimit = window.innerHeight * 0.7; // 画面上から30%の位置
+
+        // typing-textが上から30%の位置に来ているかどうかをチェック
+        const isInView = sectionRect.top <= scrollLimit;
+
+        if (isInView) {
+            // スクロールを無効にする
+            event.preventDefault(); // スクロールイベントを無効化
+            disableScroll(); // ボディのスクロールを無効に
+
+            let scrollDirection;
+
+            // スクロールイベントの場合
+            if (event.type === 'wheel') {
+                scrollDirection = event.deltaY > 0 ? 1 : -1; // スクロール方向の判定
+                increaseAmount = 13; // マウススクロール時の増加量を増やす
+            } 
+            // タッチイベントの場合
+            else if (event.type === 'touchmove') {
+                const touchMoveY = event.touches[0].clientY - startY; // タッチの移動量
+                scrollDirection = touchMoveY > 0 ? -1 : 1; // 上にスワイプか下にスワイプか
+                increaseAmount = 2; // マウススクロール時の増加量を増やす
+            }
+            // 増減する文字数
+            const newLength = Math.min(Math.max(displayedText.length + (scrollDirection * increaseAmount), 0), originalText.length);
+
+            previousLength = newLength; // 現在の文字数を保存
+            console.log(previousLength);
+
+            // previousLengthが0だったらzeroCountを増やす
+            if (previousLength === 0) {
+                zeroCount++;
+            } else {
+                zeroCount = 0; // previousLengthが0でなければカウントをリセット
+            }
+            console.log(zeroCount);
+             
+            // zeroCountが2以上であれば全体のif文を抜ける
+            if (zeroCount >= 2) {
+                enableScroll(); // スクロールを有効に
+                return; // 処理を終了して何もしない
+            }
+
+            // 文字数を更新
+            if (newLength !== displayedText.length) {
+                displayedText = originalText.slice(0, newLength);
+                typingTextElement.innerHTML = displayedText; // innerHTMLを使用して改行を反映
+                updateTextOpacity();
+            }
+        } else {
+            enableScroll(); // ボディのスクロールを有効に
+        }
+    }
+
+    // スワイプ開始位置を記録
+    let startY = 0;
+    window.addEventListener('touchstart', (event) => {
+        startY = event.touches[0].clientY; // 最初のタッチ位置を取得
+    });
+
+    // スワイプイベントを追加
+    window.addEventListener('touchmove', (event) => {
+        handleScrollOrSwipe(event); // スワイプイベントを処理
+    });
+
+    // スクロールイベントリスナーを追加
+    window.addEventListener('wheel', (event) => {
+        handleScrollOrSwipe(event); // スクロールイベントを処理
+    }); 
+
+    // テキストの透明度を更新する関数
+    function updateTextOpacity() {
+        const textLength = displayedText.length;
+        typingTextElement.style.opacity = textLength > 0 ? 1 : 0; // 文字があれば表示、なければ非表示
+    }
+});
+
+
+
+
+// ここまでがテキスト増加処理のコードです。
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
     // 背景画像を管理する配列
     const backgroundImages = [
         { image: 'images/back1.png', start: 0, end: 1200 },  // 601pxから1200pxまで
