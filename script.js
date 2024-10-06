@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------------
     const typingTextElement = document.getElementById('typing-text');
     const typingContainerElement = document.getElementById('typing-container');
-    const originalText = "『夢重力枕（Zero gravity）』は、柔らかく衛生的な 新素材TPE（ゲル構造）を採用した新しい寝具素材です。<br>ハニカムパターンのグリッド と低刺激性換気ラテックスにより、優れた弾力性と柔軟性を実現しています。<br> これにより、従来のウレタンフォームやファイバーに代わる、圧力分散と無重力のような寝心地を提供します。 <br>抜群の通気性と吸湿発散性により、頭部の熱を抑え、寝返りを減らすことができます。 <br>仰向けや横向きなど様々な睡眠姿勢に対応し、180度回転で2段階の高さ調整が可能です。<br>強い反発力を持つ、おすすめの枕です。"; // 実際のテキストに置き換え
+    const originalText = "『<span class='highlight'>夢</span>重力枕（Zero gravity）』は、柔らかく衛生的な 新素材<span class='highlight'>TPE</span>（ゲル構造）を採用した新しい寝具素材です。<br><span class='highlight'>ハニカムパターン</span>のグリッド と低刺激性換気ラテックスにより、優れた弾力性と柔軟性を実現しています。<br> これにより、従来のウレタンフォームやファイバーに代わる<span class='highlight'>圧力分散</span>と<span class='highlight'>無重力</span>のような寝心地を提供します。 <br>さらに<span class='highlight'>抜群の通気性</span>と<span class='highlight'>吸湿発散性</span>により、頭部の熱を抑え、寝返りを減らすことができます。 <br>仰向けや横向きなど様々な睡眠姿勢に対応し、180度回転で2段階の高さ調整が可能です。"; // 実際のテキストに置き換え
     let displayedText = '';
     let zeroCount = 0; // newLengthが0であった回数をカウント
     let increaseAmount = 2; // デフォルトの増加量
