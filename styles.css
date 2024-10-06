@@ -1,25 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
+ /* スクロール防止時のオーバーレイ */
+ #scroll-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* 半透明の黒 */
+    z-index: 999; /* 他の要素より前面に表示 */
+    display: none;
+}
+#scroll-overlay.active {
+    display: block;
+}
+
+/* スクロール防止用のCSSクラス */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Typing Container のスタイル */
 #typing-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 60vh;       /* ビューポートの高さに合わせる */
+    /* ページ内で適切な位置に配置するためのスタイル */
+}
+
+/* Typing Text のスタイル */
+#typing-text {
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 #typing-box {
-    height: 250px; /* デスクトップ用のボックスの高さ */
-    width: 80%; /* ボックスの幅 */
-    background-color: rgba(0, 0, 0, 0.5); /* 背景色 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* モバイル用のスタイル */
-@media (max-width: 768px) {
-    #typing-box {
-        height: 470px; /* モバイル用のボックスの高さ */
-    }
+    padding-top: 10px;
 }
 
 
