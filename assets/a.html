@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Pro</title>
+  <style>
+    /* リセットと基本設定 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+    }
+
+    /* セクションコンテンツのスタイル */
+    .section__content {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      width: 60ch;
+      max-width: 90vw;
+    }
+
+    /* 見出しのスタイル */
+    h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: clamp(2.5rem, 7vw + 1rem, 10rem);
+      line-height: 1;
+      position: relative;
+    }
+
+    h1 span:first-of-type {
+      opacity: 0.5;
+      font-size: 0.35em;
+      color: #ff0000; /* 赤色に変更 */
+      margin-bottom: 0.5rem;
+      animation: fadeAway 5s forwards;
+    }
+
+    h1 span:last-of-type {
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #cccccc 50%,
+        #0000ff,
+        #ff00ff,
+        #00ff00,
+        #ff8000
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+      background-size: 300% 200%;
+      animation: bgMove 10s linear infinite, scaleUp 5s forwards;
+    }
+
+    /* アニメーション定義 */
+    @keyframes fadeAway {
+      0% { opacity: 0.5; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 200%; }
+    }
+
+    @keyframes scaleUp {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+  <div class="section__content">
+    <h1>
+      <span>All-new</span>
+      <span>CSS Pro</span>
+    </h1>
+  </div>
+</body>
+</html>
