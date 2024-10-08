@@ -5,24 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夢重力 - まるで夢の中で浮遊しているような眠り</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="background-image"></div>
     <div class="content-wrapper">
-        <header class="container">
-            <!-- 必要に応じてヘッダーコンテンツを追加 -->
-            <nav class="navbar">
-                <ul>
-                    <li><a href="#hero">ホーム</a></li>
-                    <li><a href="#features">特徴</a></li>
-                    <li><a href="#testimonials">お客様の声</a></li>
-                    <li><a href="#about">私たちについて</a></li>
-                    <li><a href="#gallery">ギャラリー</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
-                </ul>
-            </nav>
-        </header>
+  
 
         <main>
             <!-- Hero セクション: h1 と h2 のみ -->
@@ -38,30 +27,59 @@
                 </h2>
             </section>
 
-            <section class="additional-content container">
-                <h3 class="text-3xl">ギャラリー</h3>
+            <section class="additional-content container mx-auto p-6" id="gallery">
+                <h3 class="text-3xl mb-4">ギャラリー</h3>
                 <div class="pillow-container">
-                    <div class="carousel-container">
-                        <div class="carousel">
-                            <div class="item a">
-                                <p>無重力マクラ 横向き</p>
-                                <img src="yoko.png" alt="夢重力枕 1" class="pillow-image">
-                            </div>
-                            <div class="item b">
-                                <p>無重力マクラ 縦向き</p>
-                                <img src="tate.png" alt="夢重力枕 2" class="pillow-image">
-                            </div>
-                            <div class="item c">
-                                <p>無重力マクラ 縦向き</p>
-                                <img src="tate1.png" alt="夢重力枕 3" class="pillow-image">
-                            </div>
+                    <div class="carousel-container relative">
+                        <div class="carousel flex space-x-4">
+                            <!-- 変更後: data-images に "images/1.jpg", "images/2.jpg", "images/3.jpg" を指定 -->
+                        <div class="item a cursor-pointer" data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
+                            <p class="text-center">無重力マクラ 横向き</p>
+                            <img src="yoko.png" alt="夢重力枕 1" class="pillow-image w-full h-auto">
                         </div>
-                        <div class="next">＞</div>
-                        <div class="prev">＜</div>
+                        <div class="item b cursor-pointer" data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
+                            <p class="text-center">無重力マクラ 縦向き</p>
+                            <img src="tate.png" alt="夢重力枕 2" class="pillow-image w-full h-auto">
+                        </div>
+                        <div class="item c cursor-pointer" data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
+                            <p class="text-center">無重力マクラ 縦向き</p>
+                            <img src="tate1.png" alt="夢重力枕 3" class="pillow-image w-full h-auto">
+                        </div>
+
+                        </div>
+                          </div>
+                </div>
+                <button class="cta-button">
+                    <a href="https://square.link/u/J2Ud1Owa">今すぐ購入</a>
+                </button>
+            </section>
+        
+            <!-- ズームボックス用モーダル -->
+            <div id="zoomModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-50">
+                <div class="relative bg-white rounded-lg overflow-hidden w-11/12 md:w-3/4 lg:w-1/2">
+                    <!-- 閉じるボタン -->
+                    <button id="closeModal" class="absolute top-2 right-2 text-gray-700 hover:text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <!-- スライダーコンテナ -->
+                    <div class="slider-container relative">
+                        <div class="slider flex transition-transform duration-300">
+                            <!-- スライドはJavaScriptで動的に追加 -->
+                        </div>
+                        <!-- ナビゲーションボタン -->
+                        <button id="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 cursor-pointer">
+                            ＜
+                        </button>
+                        <button id="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 cursor-pointer">
+                            ＞
+                        </button>
                     </div>
                 </div>
-                <button class="cta-button">今すぐ購入</button>
-            </section>
+            </div>
       
             <!-- タイピングアニメーション用セクションの追加 -->
             <section class="typing-section container" id="typing-section">
@@ -73,6 +91,17 @@
                 </div>
                 
             </section>
+
+
+            <!--スマホ用-->
+            <section class="typing-section container" id="typing-section2">
+                『<span class='highlight'>夢</span>重力枕（Zero gravity）』は、柔らかく衛生的な 新素材<span class='highlight'>TPE</span>（ゲル構造）を採用した新しい寝具素材です。<br>
+                <span class='highlight'>ハニカムパターン</span>のグリッド と低刺激性換気ラテックスにより、優れた弾力性と柔軟性を実現しています。<br> 
+                これにより、従来のウレタンフォームやファイバーに代わる<span class='highlight'>圧力分散</span>と<span class='highlight'>無重力</span>のような寝心地を提供します。 <br>
+                さらに<span class='highlight'>抜群の通気性</span>と<span class='highlight'>吸湿発散性</span>により、頭部の熱を抑え、寝返りを減らすことができます。 <br>
+                仰向けや横向きなど様々な睡眠姿勢に対応し、180度回転で2段階の高さ調整が可能です。
+                
+            </section>
             
 
 
@@ -82,51 +111,40 @@
                 <div class="feature-grid">
                     <div class="feature-card">
                         <h4 class="text-xl">一晩中涼しい</h4>
-                        <p>ハニカムパターングリッドの層が、抜群の通気性を実現し
+                        <p><span class="highlight">ハニカムパターングリッド</span>の層が、抜群の通気性を実現し
                             、吸湿発散性が高いカバーも併せて使用することで
                             一晩中涼しく快適に過ごすことができる。
                         </p>
                     </div>
                     <div class="feature-card">
                         <h4 class="text-xl">圧力分散＋夢重力サポート</h4>
-                        <p>ハニカムパターンのグリッドと低刺激性換気ラテックスは、
+                        <p><span class="highlight">ハニカムパターン</span>のグリッドと<span class="highlight">低刺激性換気ラテックス</span>は、
                             柔らかさとサポートの理想的なバランスを取り、夢重力で快適な睡眠のサポート。</p>
                     </div>
                     <div class="feature-card">
                         <h4 class="text-xl">疲労回復</h4>
                         <p>科学が証明する快眠の鍵。最適な高さと弾力が、
-                            首と脊椎を完璧にサポート。深い眠りがもたらす究極の疲労回復。
+                            首と脊椎を完璧にサポート。<span class="highlight">深い眠り</span>がもたらす究極の疲労回復。
                             あなたの健康は、この枕から始まる。</p>
                     </div>
                 </div>
             </section>
 
-            
-            <!-- 追加セクション: お客様の声 -->
-            <section class="testimonials container" id="testimonials">
-                <h3 class="text-3xl">お客様の声</h3>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card">
-                        <p>"夢重力枕を使い始めてから、毎朝の目覚めが格段に良くなりました。まさに夢の中で眠っているような感覚です！"</p>
-                        <h4 class="testimonial-author">田中 一郎</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"通気性が抜群で、一晩中涼しく快適に眠ることができました。おすすめです！"</p>
-                        <h4 class="testimonial-author">佐藤 花子</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"首と脊椎のサポートがしっかりしていて、深い眠りを実感しています。疲れが取れやすくなりました。"</p>
-                        <h4 class="testimonial-author">鈴木 太郎</h4>
-                    </div>
-                </div>
-            </section>
+<!-- 追加セクション: 私たちについて -->
+<section class="about-us container" id="about">
+    <h3 class="text-3xl">私たちについて</h3>
+    <p>夢重力は、快適な睡眠を追求するために開発されたマクラです。私たちは科学的な研究に基づき、最高品質のマクラを提供しています。お客様一人ひとりの健康と快適な睡眠をサポートすることを使命としています。</p>
+    <p>お客様にご満足いただけない場合は、商品をご返品いただけます。その際、<span class="highlight">全額返金</span>を保証いたしますので、どうぞご安心してご購入ください。</p>
+    <ul class="mt-4">
+        <li>
+            <a href="assets/pdfs/research_study.pdf" target="_blank" rel="noopener noreferrer"
+               class="feature-card2">
+               ハニカムパターングリッド開発資料
+            </a>
+        </li>
+    </ul>
+</section>
 
-            <!-- 追加セクション: 私たちについて -->
-            <section class="about-us container" id="about">
-                <h3 class="text-3xl">私たちについて</h3>
-                <p>夢重力は、快適な睡眠を追求するために設立された企業です。私たちは科学的な研究に基づき、最高品質のマクラを提供しています。お客様一人ひとりの健康と快適な睡眠をサポートすることを使命としています。</p>
-                <br><p>ここで証拠の画像など入れる</p>
-            </section>
 
 
             <!-- 追加セクション: よくある質問 -->
@@ -169,9 +187,9 @@
         <footer class="container">
             
             <div class="social-media">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="assets/tiktok-icon.png" alt="Tiktok"></a>
+                <a href="#"><img src="assets/twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="assets/instagram-icon.png" alt="Instagram"></a>
             </div>
             <p>&copy; 2024 夢重力. All rights reserved.</p>
         </footer>

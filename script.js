@@ -1,4 +1,83 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const zoomModal = document.getElementById('zoomModal');
+    const closeModal = document.getElementById('closeModal');
+    const items = document.querySelectorAll('.carousel .item');
+    const slider = document.querySelector('.slider');
+    const prevSlideBtn = document.getElementById('prevSlide');
+    const nextSlideBtn = document.getElementById('nextSlide');
+    let currentIndex = 0;
+    let currentImages = [];
+
+    // アイテムをクリックしたときにモーダルを開く
+    items.forEach((item) => {
+        item.addEventListener('click', () => {
+            const images = JSON.parse(item.getAttribute('data-images'));
+            setSliderImages(images);
+            zoomModal.classList.remove('hidden');
+        });
+    });
+
+    // モーダルを閉じる
+    closeModal.addEventListener('click', () => {
+        zoomModal.classList.add('hidden');
+    });
+
+    // 外部クリックでモーダルを閉じる
+    zoomModal.addEventListener('click', (e) => {
+        if (e.target === zoomModal) {
+            zoomModal.classList.add('hidden');
+        }
+    });
+
+// スライドの画像を設定
+function setSliderImages(images) {
+    currentImages = images;
+    currentIndex = 0;
+    // スライダーをリセット
+    slider.innerHTML = '';
+    images.forEach((src) => {
+        const slide = document.createElement('div');
+        slide.classList.add('slide', 'min-w-full', 'flex-shrink-0');
+        const img = document.createElement('img');
+        img.src = src; // "images/1.jpg" などのパスが指定されている
+        img.alt = "詳細画像";
+        img.classList.add('max-w-full', 'max-h-96', 'mx-auto', 'object-contain'); // ここを変更
+        slide.appendChild(img);
+        slider.appendChild(slide);
+    });
+    updateSliderPosition();
+}
+
+
+    // スライドの位置を更新
+    function updateSliderPosition() {
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    // 前のスライドへ
+    prevSlideBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSliderPosition();
+        }
+    });
+
+    // 次のスライドへ
+    nextSlideBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentIndex < currentImages.length - 1) {
+            currentIndex++;
+            updateSliderPosition();
+        }
+    });
+});
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
     // ---------------------------
     // Typing Text Increase Script
     // ---------------------------
