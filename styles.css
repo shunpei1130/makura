@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
+/* 基本的に全ての要素を非表示にする */
+.desktop-only,
+.mobile-only {
+    display: none;
+}
+
+/* デスクトップ用のスタイル（幅769px以上） */
+@media (min-width: 769px) {
+    .desktop-only {
+        display: block; /* 必要に応じて他の表示プロパティに変更 */
+    }
+}
+
+/* モバイル用のスタイル（幅768px以下） */
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block; /* 必要に応じて他の表示プロパティに変更 */
+    }
+}
+
 
 .section__content {
     min-height: 100vh;
