@@ -1,22 +1,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
-/* スマートフォンの画面幅（例: 最大幅768px）でセクションを非表示にする */
-@media only screen and (max-width: 768px) {
-    #typing-section {
-        display: none;
-    }
-}
-/* デフォルトでは非表示にする */
-#typing-section2 {
-    display: none;
+
+.section__content {
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    width: 60ch;
+    max-width: 100vw;
+    margin: 0 auto;
+    opacity: 0; /* 初期状態で非表示 */
+    transform: translateY(20px); /* 少し下にずらす */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* フェードインとスライドアップのトランジション */
 }
 
-/* スマートフォンの画面幅（例: 最大幅768px）でセクションを表示する */
-@media only screen and (max-width: 768px) {
-    #typing-section2 {
-        display: block; /* または他の適切な表示スタイル（flex, gridなど） */
+.section__content.visible {
+    opacity: 1; /* 表示時に不透明に */
+    transform: translateY(0); /* 元の位置に戻す */
+}
+.section__content2 {
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    width: 60ch;
+    max-width: 100vw;
+    margin: 0 auto;
+    opacity: 0; /* 初期状態で非表示 */
+    transform: translateY(20px); /* 少し下にずらす */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* フェードインとスライドアップのトランジション */
+}
+
+.section__content2.visible {
+    opacity: 1; /* 表示時に不透明に */
+    transform: translateY(0); /* 元の位置に戻す */
+}
+
+
+
+section:nth-of-type(3) {
+    position: relative;
+    width: 100vw;
+    height: 200vh;
+    view-timeline-name: --section;
+}
+section:nth-of-type(4) {
+    position: relative;
+    width: 100vw;
+    height: 200vh;
+    view-timeline-name: --section;
+}
+
+/* Heading */
+h5 {
+    display: grid;
+    font-size: clamp(2.5rem, 7vw + 1rem, 10rem);
+    text-align: center;
+    line-height: 1;
+    margin: 0;
+    max-width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h5 span:nth-of-type(1),
+h5 span:nth-of-type(3) {
+    display: inline-block;
+    color: hsl(0, 0%, 100%);
+    font-size: 1em;
+    animation: fade-away both linear;
+    animation-timeline: --section;
+    animation-range: entry-crossing 50% exit 50%;
+}
+
+h5 span:nth-of-type(2),
+h5 span:nth-of-type(4) {
+    display: inline-block;
+    animation: scale-up both cubic-bezier(.1,.7,.9,1.3), fade-away both linear;
+    animation-timeline: --section;
+    animation-range: entry-crossing 60% exit 70%, exit 10% exit 50%;	
+}
+
+@keyframes scale-up {
+    to {
+        transform: scale(1.5);
     }
 }
+
+@keyframes fade-away {
+    100% {
+        opacity: 0;
+    }
+}
+
+
+    #typing-section {
+        display: block; /* または他の適切な表示スタイル（flex, gridなど） */
+    }
+
 
 
  /* スクロール防止時のオーバーレイ */
@@ -324,20 +413,6 @@ footer {
     }
 }
 
-/* 追加: subTitle の初期スタイル */
-#subTitle {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* 追加: subTitle が表示されるときのスタイル */
-#subTitle.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* タイピングアニメーション */
 
 /* カーソル（点滅） */
 .cursor {
