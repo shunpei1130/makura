@@ -306,4 +306,212 @@ function setSliderImages(images) {
     const h1Observer = new IntersectionObserver(h1ObserverCallback, h1ObserverOptions);
     const typingText1 = document.getElementById('typing-text1');
     if (typingText1) h1Observer.observe(typingText1);
+
+// モバイルサイズのメディアクエリ（例: 幅768px以下）
+const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+
+let scrollListenerAdded = false;
+
+// アニメーションを初期化する関数
+function initScrollLinkedAnimation() {
+    const h5 = document.querySelector('h5');
+    const spans = h5.querySelectorAll('span');
+
+    // アニメーションが発生するビューポート内の開始点と終了点（割合）
+    const animationStartRatio = 0.2; // ビューポートの20%の位置
+    const animationEndRatio = 0.8;   // ビューポートの80%の位置
+
+    // アニメーションの更新関数
+    function updateAnimation() {
+        const rect = h5.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        // アニメーションの開始位置と終了位置をピクセルで計算
+        const startPoint = viewportHeight * animationStartRatio;
+        const endPoint = viewportHeight * animationEndRatio;
+
+        // h5要素の上端と下端の位置
+        const h5Top = rect.top;
+        const h5Bottom = rect.bottom;
+
+        let progress = 0;
+
+        // h5要素がアニメーション範囲内に入っているかチェック
+        if (h5Top < endPoint && h5Bottom > startPoint) {
+            const totalRange = h5Bottom - h5Top;
+            const scrolled = endPoint - h5Top;
+            progress = scrolled / (endPoint - startPoint);
+            progress = Math.min(Math.max(progress, 0), 1); // 0から1の範囲にクランプ
+        }
+
+        // 各span要素のスタイルを更新
+        spans.forEach((span, index) => {
+            let scale;
+            let opacity;
+
+            // spanのインデックスに基づいてアニメーションの種類を決定
+            if (index === 0 || index === 2) {
+                // span 1と3はスケールダウン
+                scale = 1.5 - 1.5 * progress;
+                opacity = 1 - progress;
+            } else if (index === 1 || index === 3) {
+                // span 2と4はスケールアップ
+                scale = 0 + 1.5 * progress;
+                opacity = progress;
+            }
+
+            // 計算したスケールとオパシティを適用
+            span.style.transform = `scale(${scale})`;
+            span.style.opacity = opacity;
+        });
+    }
+
+    // スクロールイベントを効率的に処理するためのフラグ
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateAnimation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    // スクロールイベントリスナーを追加
+    window.addEventListener('scroll', onScroll);
+    scrollListenerAdded = true;
+
+    // 初期ロード時にもアニメーションを更新
+    updateAnimation();
+}
+
+// アニメーションを解除する関数（必要に応じてリセット）
+function removeScrollLinkedAnimation() {
+    const h5 = document.querySelector('h5');
+    const spans = h5.querySelectorAll('span');
+
+    // スクロールイベントリスナーの削除
+    if (scrollListenerAdded) {
+        window.removeEventListener('scroll', onScroll);
+        scrollListenerAdded = false;
+    }
+
+    // 各spanのスタイルをリセット
+    spans.forEach(span => {
+        span.style.transform = 'scale(0)';
+        span.style.opacity = '0';
+    });
+}
+
+// アニメーションの更新関数を外部でアクセス可能にするために変数に保持
+let onScroll = () => {};
+
+// アニメーションを初期化する関数を更新
+function initScrollLinkedAnimationUpdated() {
+    const h5 = document.querySelector('h5');
+    const spans = h5.querySelectorAll('span');
+
+    // アニメーションが発生するビューポート内の開始点と終了点（割合）
+    const animationStartRatio = 0.2; // ビューポートの20%の位置
+    const animationEndRatio = 0.8;   // ビューポートの80%の位置
+
+    // アニメーションの更新関数
+    function updateAnimation() {
+        const rect = h5.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        // アニメーションの開始位置と終了位置をピクセルで計算
+        const startPoint = viewportHeight * animationStartRatio;
+        const endPoint = viewportHeight * animationEndRatio;
+
+        // h5要素の上端と下端の位置
+        const h5Top = rect.top;
+        const h5Bottom = rect.bottom;
+
+        let progress = 0;
+
+        // h5要素がアニメーション範囲内に入っているかチェック
+        if (h5Top < endPoint && h5Bottom > startPoint) {
+            const totalRange = h5Bottom - h5Top;
+            const scrolled = endPoint - h5Top;
+            progress = scrolled / (endPoint - startPoint);
+            progress = Math.min(Math.max(progress, 0), 1); // 0から1の範囲にクランプ
+        }
+
+        // 各span要素のスタイルを更新
+        spans.forEach((span, index) => {
+            let scale;
+            let opacity;
+
+            // spanのインデックスに基づいてアニメーションの種類を決定
+            if (index === 0 || index === 2) {
+                // span 1と3はスケールダウン
+                scale = 1.5 - 1.5 * progress;
+                opacity = 1 - progress;
+            } else if (index === 1 || index === 3) {
+                // span 2と4はスケールアップ
+                scale = 0 + 1.5 * progress;
+                opacity = progress;
+            }
+
+            // 計算したスケールとオパシティを適用
+            span.style.transform = `scale(${scale})`;
+            span.style.opacity = opacity;
+        });
+    }
+
+    // スクロールイベントを効率的に処理するためのフラグ
+    let ticking = false;
+    onScroll = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateAnimation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+
+    // スクロールイベントリスナーを追加
+    window.addEventListener('scroll', onScroll);
+    scrollListenerAdded = true;
+
+    // 初期ロード時にもアニメーションを更新
+    updateAnimation();
+}
+
+// アニメーションを解除する関数（必要に応じてリセット）
+function removeScrollLinkedAnimation() {
+    const h5 = document.querySelector('h5');
+    const spans = h5.querySelectorAll('span');
+
+    // スクロールイベントリスナーの削除
+    if (scrollListenerAdded) {
+        window.removeEventListener('scroll', onScroll);
+        scrollListenerAdded = false;
+    }
+
+    // 各spanのスタイルをリセット
+    spans.forEach(span => {
+        span.style.transform = 'scale(0)';
+        span.style.opacity = '0';
+    });
+}
+
+// メディアクエリの変更を監視
+mobileMediaQuery.addEventListener('change', (e) => {
+    if (e.matches) {
+        // モバイルサイズになったらアニメーションを初期化
+        initScrollLinkedAnimationUpdated();
+    } else {
+        // モバイルサイズから外れたらアニメーションを解除
+        removeScrollLinkedAnimation();
+    }
+});
+
+// 初期ロード時にメディアクエリをチェック
+if (mobileMediaQuery.matches) {
+    initScrollLinkedAnimationUpdated();
+}
 });

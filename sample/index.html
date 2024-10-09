@@ -1,150 +1,129 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CSS Pro - All-new Features</title>
-  <!-- 必要に応じてスタイルシートを追加 -->
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>スクロール連動アニメーション</title>
+    <style>
+        /* ページ全体のスタイル */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* スクロール用のダミーセクション */
+        .spacer {
+            height: 100vh;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        /* h5要素のスタイル */
+        h5 {
+            text-align: center;
+            font-size: 2rem;
+            margin: 50px 0;
+        }
+
+        /* span要素の初期スタイル */
+        h5 span {
+            display: inline-block;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            transform: scale(0);
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
-  <div class="support">Check this out in Chrome 115+ / Chrome Canary</div>
-  <nav>
-    <div class="nav__content">
-      <img
-        src="https://assets.codepen.io/605876/bear-2022--white.png"
-        alt="Logo"
-      />
-      <a
-        href="https://twitter.com/intent/follow?screen_name=jh3yy"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Follow</a>
+    <!-- ダミーコンテンツ：スクロールのためのスペーサー -->
+    <div class="spacer">
+        スクロールダウンしてアニメーションを確認
     </div>
-  </nav>
-  <section>
-    <div class="section__content">
-      <h1>
-        <span>All-new</span>
-        <span>CSS Pro</span>
-      </h1>
+
+    <!-- アニメーション対象のh5要素 -->
+    <h5>
+        <span>テキスト1</span>
+        <span>テキスト2</span>
+        <span>テキスト3</span>
+        <span>テキスト4</span>
+    </h5>
+
+    <!-- ダミーコンテンツ：さらにスクロールさせるためのスペーサー -->
+    <div class="spacer">
+        さらにスクロール
     </div>
-  </section>
-  <section>
-    <div class="cta">
-      <div class="cta__content">
-        <a
-          href="https://codepen.io/jh3y/details/zYyzYpY"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>Add to Bookmarks</span>
-          <span>
-            <svg
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="section__content">
-      <p>
-        Dynamic call-to-action powered by <span>container queries</span> and
-        <span>scroll-driven animations</span>.
-      </p>
-    </div>
-  </section>
-  <section>
-    <video
-      src="https://assets.codepen.io/605876/seoul-21116.mp4"
-      autoplay
-      playsinline
-      muted
-      loop
-    ></video>
-    <div class="cta">
-      <div class="cta__content">
-        <a
-          href="https://codepen.io/jh3y/details/zYyzYpY"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>Heart this pen (3x)</span>
-          <span>
-            <svg
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
-              />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="section__content">
-      <p>
-        Define transition sequences using <span>style queries</span>. Then
-        toggle them with <span>scroll-driven animations</span>. Resulting in
-        <span>scroll-triggered animations</span>.
-      </p>
-    </div>
-  </section>
-  <section>
-    <div class="cta">
-      <div class="cta__content">
-        <a
-          href="https://twitter.com/intent/tweet?text=%22Apple%20Style%20CTA%20Reveal%20with%20CSS%20scroll-driven%20animations%22%20via%20%40jh3yy%0Ahttps://codepen.io/jh3y/pen/zYyzYpY"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>Share over on</span>
-          <span>
-            <svg
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Twitter</title>
-              <path
-                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-              />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div class="section__content">
-      <h2>
-        <span>Become a</span>
-        <span>CSS Pro</span>
-      </h2>
-    </div>
-  </section>
-  <section>
-    <div class="section__content">
-      <h2>fin.</h2>
-    </div>
-  </section>
-  
-  <!-- 必要に応じてスクリプトを追加 -->
-  <script>
-    // 例: スクロールドリブンアニメーションやコンテナクエリのサポート
-    // ここにJavaScriptコードを追加
-  </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const h5 = document.querySelector('h5');
+            const spans = h5.querySelectorAll('span');
+
+            // アニメーションが発生するビューポート内の開始点と終了点（割合）
+            const animationStartRatio = 0.2; // ビューポートの20%の位置
+            const animationEndRatio = 0.8;   // ビューポートの80%の位置
+
+            // アニメーションの更新関数
+            function updateAnimation() {
+                const rect = h5.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                // アニメーションの開始位置と終了位置をピクセルで計算
+                const startPoint = viewportHeight * animationStartRatio;
+                const endPoint = viewportHeight * animationEndRatio;
+
+                // h5要素の上端と下端の位置
+                const h5Top = rect.top;
+                const h5Bottom = rect.bottom;
+
+                let progress = 0;
+
+                // h5要素がアニメーション範囲内に入っているかチェック
+                if (h5Top < endPoint && h5Bottom > startPoint) {
+                    const totalRange = h5Bottom - h5Top;
+                    const scrolled = endPoint - h5Top;
+                    progress = scrolled / (endPoint - startPoint);
+                    progress = Math.min(Math.max(progress, 0), 1); // 0から1の範囲にクランプ
+                }
+
+                // 各span要素のスタイルを更新
+                spans.forEach((span, index) => {
+                    let scale;
+                    let opacity;
+
+                    // spanのインデックスに基づいてアニメーションの種類を決定
+                    if (index === 0 || index === 2) {
+                        // span 1と3はスケールダウン
+                        scale = 1.5 - 1.5 * progress;
+                        opacity = 1 - progress;
+                    } else if (index === 1 || index === 3) {
+                        // span 2と4はスケールアップ
+                        scale = 0 + 1.5 * progress;
+                        opacity = progress;
+                    }
+
+                    // 計算したスケールとオパシティを適用
+                    span.style.transform = `scale(${scale})`;
+                    span.style.opacity = opacity;
+                });
+            }
+
+            // スクロールイベントを効率的に処理するためのフラグ
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateAnimation();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // 初期ロード時にもアニメーションを更新
+            updateAnimation();
+        });
+    </script>
 </body>
 </html>
