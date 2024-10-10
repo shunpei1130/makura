@@ -956,7 +956,7 @@ h3{
 .submit-button {
     padding: 15px;
     font-size: 1.1rem;
-    background-color: #28a745;
+    background-color: #805ad5;
     color: #fff;
     border: none;
     border-radius: 50px;
@@ -965,7 +965,7 @@ h3{
 }
 
 .submit-button:hover {
-    background-color: #218838;
+    background-color: #895beb;
 }
 
 /* =========================================
@@ -1116,7 +1116,6 @@ footer p {
     right: -60%; /* 左側に広げる */
 }
 .cta-button {
-    margin-top: 15%;
     padding: 10px 20px;
     font-size: 1em;
     background-color: #805ad5;
@@ -1125,7 +1124,7 @@ footer p {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    min-width: 20%;
+    min-width: 60%;
 }
 
 .cta-button:hover {
