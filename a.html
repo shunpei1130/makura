@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Glitter Card</title>
+    <style>
+        :root {
+            --glitter: url("https://assets.codepen.io/13471/silver-glitter-background.png");
+            --duration: 6.66s;
+        }
+
+        .card-front:before {
+            content: "";
+            inset: 0;
+            position: absolute;
+            transform: translate3d(0, 0, 0.01px);
+            background-image: var(--glitter), var(--glitter),
+                linear-gradient(120deg, black 25%, white, black 75%);
+            background-size: 100% 100%, 80% 80%, 200% 200%;
+            background-blend-mode: multiply, multiply, overlay;
+            background-position: 50% 50%, 50% 50%, 50% 50%;
+            mix-blend-mode: color-dodge;
+            filter: brightness(2) contrast(0.8);
+            animation: bg var(--duration) ease infinite;
+        }
+
+        .card-front {
+            display: grid;
+            position: relative;
+            transform: translate3d(0, 0, 0.01px);
+            width: 90vw;
+            max-width: 580px;
+            aspect-ratio: 3 / 2;
+            border-radius: 3.5% / 5%;
+            background-image: url('hani.jpg');
+            background-size: cover;
+            box-shadow: 0 30px 40px -25px rgba(15, 5, 20, 1), 0 20px 50px -15px rgba(15, 5, 20, 1);
+            overflow: hidden;
+            animation: tilt var(--duration) ease infinite;
+            image-rendering: optimizequality;
+        }
+
+        .card-front:after {
+            content: "";
+            background: none, none, linear-gradient(125deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 0.1%, rgba(255,255,255,0) 60%);
+            background-size: 200% 200%;
+            mix-blend-mode: hard-light;
+            animation: bg var(--duration) ease infinite;
+        }
+
+        .card-front * {
+            font-family: 'PT Mono', monospace;
+        }
+
+  
+
+        @keyframes tilt {
+            0%, 100% { transform: translate3d(0, 0, 0.01px) rotateY(-20deg) rotateX(5deg); }
+            50% { transform: translate3d(0, 0, 0.01px) rotateY(20deg) rotateX(5deg); }
+        }
+
+        @keyframes bg {
+            0%, 100% { background-position: 50% 50%, calc(50% + 1px) calc(50% + 1px), 0% 50%; }
+            50% { background-position: 50% 50%, calc(50% - 1px) calc(50% - 1px), 100% 50%; }
+        }
+
+       
+    </style>
+</head>
+<body>
+    <main id="app">
+        <aside class="card-front">
+           
+        </aside>
+    </main>
+
+ 
+</body>
+</html>

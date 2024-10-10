@@ -8,8 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 </head>
-<body>
-    <div class="background-image"></div>
+<body><div id="container"></div>
     <div class="content-wrapper">
   
 
@@ -83,7 +82,6 @@
       
          
 
-
             <section class="desktop-only h-screen">
                 <div class="section__content">
                   <h5>
@@ -107,26 +105,26 @@
               </section>
 
 
-                                                <!-- モバイル版を他のデザインで作成する必要あり -->
 
-              <section class="mobile-only h-screen">
-                <div>
+            <section class="mobile-only h-screen">
+                <div class="con">
                   <h6>
-                    <p><strong class='highlight'>夢</strong>重力枕（Zero gravity）は、柔らかく衛生的な新素材<strong class='highlight'>TPE</strong>（ゲル構造）を採用した新しい寝具素材です。<br>
-                        </p>
-                        
-                    <p><strong class='highlight'>ハニカムパターン</strong>のグリッド と低刺激性換気ラテックスにより優れた弾力性と柔軟性を実現しています。</p>
-                  
-                    <p>これにより、従来のウレタンフォームやファイバーに代わる<strong class='highlight'>圧力分散</strong>と<strong class='highlight'>無重力</strong>のような寝心地を提供します。</p>
-                        
+                    <p><strong class='highlight'>夢</strong><span class="text-effect">重力枕（Zero gravity）は、柔らかく衛生的な新素材</span><strong class='highlight'>TPE</strong><span class="text-effect">（ゲル構造）を採用した新しい寝具素材です。</span>
+                    </p>
+                        <br><br>
+                    <p><strong class='highlight'>ハニカムパターン</strong><span class="text-effect">のグリッド と低刺激性換気ラテックスにより優れた弾力性と柔軟性を実現しています。</span>
+                    </p>
+                    <br><br>
+                    <p><span class="text-effect">これにより、従来のウレタンフォームやファイバーに代わる</span><strong class='highlight'>圧力分散</strong>と<strong class='highlight'>無重力</strong><span class="text-effect">のような寝心地を提供します。</span>
+                    </p>
+                    <br><br>
                     <p>
-                        さらに<strong class='highlight'>抜群の通気性</strong>と<strong class='highlight'>吸湿発散性</strong>により、頭部の熱を抑え、寝返りを減らすことができます。 <br>
-                        仰向けや横向きなど様々な睡眠姿勢に対応し、180度回転で2段階の高さ調整が可能です。</p>
+                        さらに<strong class='highlight'>抜群の通気性</strong>と<strong class='highlight'>吸湿発散性</strong><span class="text-effect">により、頭部の熱を抑え、寝返りを減らすことができます。</span>
+                        <span class="text-effect">仰向けや横向きなど様々な睡眠姿勢に対応し、</span><strong class='highlight'>180度回転で2段階</strong>の高さ調整が可能です。
+                    </p>
                   </h6>
                 </div>
               </section>
-            
-
 
             <!-- 追加セクション: 夢重力マクラの特徴 -->
             <section class="features container h-screen" id="features">
@@ -154,7 +152,7 @@
             </section>
 
 <!-- 追加セクション: 私たちについて -->
-<section class="about-us container h-screen" id="about">
+<section class="about-us container h-screen flex flex-col justify-center" id="about">
     <h3 class="text-3xl">私たちについて</h3>
     <p>夢重力は、快適な睡眠を追求するために開発されたマクラです。私たちは科学的な研究に基づき、最高品質のマクラを提供しています。お客様一人ひとりの健康と快適な睡眠をサポートすることを使命としています。</p>
     <p>お客様にご満足いただけない場合は、商品をご返品いただけます。その際、<span class="highlight">全額返金</span>を保証いたしますので、どうぞご安心してご購入ください。</p>
@@ -185,6 +183,50 @@
                     <h4 class="faq-question">洗濯はできますか？</h4>
                     <p class="faq-answer">カバーは取り外して洗濯可能です。詳しい洗濯方法は取扱説明書をご参照ください。</p>
                 </div>
+                <main id="app" class="flex justify-center items-center">
+                    <aside class="card-front">
+                       
+                          <label class="name" for="cardHolder">
+                            Kiii Brah
+                          </label>
+                          <label class="expiry" for="expiryMonth" >
+                            03/27
+                          </label>
+                          <img class="cardLogo" data-v-5d206127="" data-v-8fcb32d4="" style="opacity: 1;" src="https://simey-credit-card.netlify.app/img/logos/master.svg">
+                          
+                            
+                          <div class="chip">
+                            <svg role="img" viewBox="0 0 100 100" aria-label="Chip">
+                              <use href="#chip-lines" />
+                            </svg>
+                          </div>
+                          <svg class="contactless" role="img" viewBox="0 0 24 24" aria-label="Contactless">
+                            <use href="#contactless">
+                          </svg>
+                    </aside>
+                </main>
+              
+                <svg id="chip">
+                    <g id="chip-lines">
+                      <polyline points="0,50 35,50"></polyline>
+                      <polyline points="0,20 20,20 35,35"></polyline>
+                      <polyline points="50,0 50,35"></polyline>
+                      <polyline points="65,35 80,20 100,20"></polyline>
+                      <polyline points="100,50 65,50"></polyline>
+                      <polyline points="35,35 65,35 65,65 35,65 35,35"></polyline>
+                      <polyline points="0,80 20,80 35,65"></polyline>
+                      <polyline points="50,100 50,65"></polyline>
+                      <polyline points="65,65 80,80 100,80"></polyline>
+                    </g>
+                  </svg>
+
+
+                  <svg id="contactless">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                     <path d="M9.172 15.172a4 4 0 0 1 5.656 0"></path>
+                     <path d="M6.343 12.343a8 8 0 0 1 11.314 0"></path>
+                     <path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0"></path>
+                  </svg>
             </section>
 
             <!-- 追加セクション: お問い合わせ -->
@@ -225,6 +267,63 @@
     </div>
     <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // テキストエフェクトの設定
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    // テキストエフェクトを適用するspanタグを選択
+    const textEffects = document.querySelectorAll("span.text-effect");
+
+    textEffects.forEach(element => {
+        // data-value属性にターゲットテキストを設定
+        const targetText = element.textContent;
+        const length = targetText.length;
+
+        // 初期表示のテキストをランダムな文字に置き換える
+        element.textContent = Array.from({length: length}, () => letters[Math.floor(Math.random() * letters.length)]).join("");
+
+        const runTextEffect = () => {
+            let iteration = 0;
+            const interval = setInterval(() => {
+                element.textContent = element.textContent
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < Math.floor(iteration)) {
+                            return targetText[index];
+                        }
+                        return letters[Math.floor(Math.random() * letters.length)];
+                    })
+                    .join("");
+                
+                if(iteration >= length){ 
+                    clearInterval(interval);
+                    element.textContent = targetText; // 最終的に正確なテキストを設定
+                }
+                
+                iteration += 0.3; // エフェクトのスピード調整
+            }, 10);
+        };
+
+        // Intersection Observer の設定
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    runTextEffect();
+                    observer.unobserve(entry.target); // 一度実行したら監視を停止
+                }
+            });
+        }, {
+            threshold: 0.5, // 要素が50%表示されたら実行
+            rootMargin: '0px' // 必要に応じて調整
+        });
+
+        observer.observe(element);
+    });
+</script>
+
+
+
+
 <script>
    $(document).ready(function(){
     var carousel = $(".carousel"),
@@ -329,7 +428,128 @@
 });
 
     </script>
+    <!-- Three.js ライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+
+    <!-- 頂点シェーダー -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main() {
+            gl_Position = vec4( position, 1.0 );
+        }
+    </script>
     
+    <!-- フラグメントシェーダー -->
+    <!-- 参考 http://glslsandbox.com/e#58290.6 -->
+    <script id="fragmentShader" type="x-shader/x-fragment">
+    // global remix - Del 30/10/2019
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+    
+    #extension GL_OES_standard_derivatives : enable
+    
+    uniform float time;
+    uniform vec2 mouse;
+    uniform vec2 resolution;
+    
+    float snow(vec2 uv, float scale) {
+        float _t = time * 0.3;
+        uv.x += _t / scale; 
+        uv *= scale;
+        vec2 s = floor(uv);
+        vec2 f = fract(uv);
+        vec2 p;
+        float k = 40.0;
+        float d;
+        p = sin(11.0 * fract(sin((s + p + scale) * mat2(7.0, 3.0, 6.0, 5.0)) * 5.0) ) - f;
+        d = length(p);
+        k = min(d, k);
+        k = smoothstep(0.0, k, sin(f.x + f.y) * 0.003); // パーティクルの大きさ
+        return k;
+    }
+    
+    void main(void) {
+        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y); 
+        // uv.x += sin(time * 0.001);
+        // uv.y += sin(uv.x * 1.4) * 0.2;
+        // uv.x *= 0.005;
+        float c = 0.0;
+        c += snow(uv, 5.0);
+        c += snow(uv, 10.0);
+        c += snow(uv, 20.0);
+        c += snow(uv, 30.0);
+        c += snow(uv, 40.0);
+        vec3 finalColor = vec3(0.9, 0.8, 0.99) * c * 30.0;
+        gl_FragColor = vec4(finalColor, 1.0);
+    }
+    </script>
+
+    <!-- メインスクリプト -->
+    <script>
+        var container;
+        var camera, scene, renderer;
+        var uniforms;
+
+        init();
+        animate();
+
+        function init() {
+            container = document.getElementById('container');
+
+            // カメラの設定
+            camera = new THREE.Camera();
+            camera.position.z = 1;
+
+            // シーンの作成
+            scene = new THREE.Scene();
+
+            // ジオメトリの作成（全画面用）
+            var geometry = new THREE.PlaneBufferGeometry(2, 2);
+
+            // ユニフォームの設定
+            uniforms = {
+                time: { type: "f", value: 1.0 },
+                resolution: { type: "v2", value: new THREE.Vector2() }
+            };
+
+            // シェーダーマテリアルの作成
+            var material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: document.getElementById('vertexShader').textContent,
+                fragmentShader: document.getElementById('fragmentShader').textContent
+            });
+
+            // メッシュの作成とシーンへの追加
+            var mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // レンダラーの作成
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // ウィンドウリサイズ時の処理
+            onWindowResize();
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize(event) {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            uniforms.resolution.value.x = renderer.domElement.width;
+            uniforms.resolution.value.y = renderer.domElement.height;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            uniforms.time.value += 0.05;
+            renderer.render(scene, camera);
+        }
+    </script>
     
 </body>
 </html>
