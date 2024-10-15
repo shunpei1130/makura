@@ -257,6 +257,7 @@ function setSliderImages(images) {
     const scrollIndicator = document.querySelector('.scroll-indicator');
     const sectionContent = document.querySelector('.section__content');
     const sectionContent2 = document.querySelector('.section__content2');
+    const recommendedPillow = document.getElementById('recommendedPillow');
 
     // Create a separate IntersectionObserver for fade-in elements
     const fadeInObserverOptions = {
@@ -276,7 +277,7 @@ function setSliderImages(images) {
     const fadeInObserver = new IntersectionObserver(fadeInObserverCallback, fadeInObserverOptions);
 
     // 追加コンテンツを監視
-    [additionalContent, ctaButton, featuresSection, footer, scrollIndicator, sectionContent2, sectionContent].forEach(el => {
+    [additionalContent, ctaButton, featuresSection, footer, scrollIndicator, sectionContent2, sectionContent, recommendedPillow].forEach(el => {
         if (el) fadeInObserver.observe(el);
     });
 

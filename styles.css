@@ -2,6 +2,240 @@
 
 
 
+/* =========================================
+   Recommended Pillow Diagnosis Section
+========================================= */
+
+/* セクション全体のスタイル */
+.recommended-pillow {
+    padding: 4rem 1rem;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.recommended-pillow.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* セクション内のコンテナ */
+.recommended-pillow .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 見出し */
+.recommended-pillow h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.text-3xl{
+    font-family: 'MyFont', sans-serif;
+    color: #d0a900;
+}
+
+/* フォームのスタイル */
+#pillowQuiz {
+    background-color: rgba(255, 255, 255, 0.2); /* 半透明の白背景 */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgba(15, 5, 20, 0.5), 0 20px 50px -15px rgba(15, 5, 20, 0.5);
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* 質問セクションのスタイル */
+#pillowQuiz .mb-6 {
+    text-align: start;
+    margin-bottom: 1.5rem;
+}
+
+#pillowQuiz label {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #ffffff;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+#pillowQuiz .form-radio {
+    accent-color: #d0a900; /* カスタムカラー */
+    margin-right: 0.5rem;
+}
+
+/* 送信ボタンのスタイル */
+#pillowQuiz .submit-button {
+    background-color: #805ad5;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+#pillowQuiz .submit-button:hover {
+    background-color: #895beb;
+}
+
+/* 結果表示エリアのスタイル */
+#quizResult {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgba(15, 5, 20, 0.5), 0 20px 50px -15px rgba(15, 5, 20, 0.5);
+    margin-top: 2rem;
+    animation: fadeInUp 1s ease forwards;
+}
+
+#quizResult h3 {
+    font-family: 'MyFont', sans-serif;
+    color: #d0a900;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#recommendedPillowContent {
+    text-align: center;
+    color: #ffffff;
+}
+
+#recommendedPillowContent h4 {
+    font-family: 'MyFont', sans-serif;
+    color: #d0a900;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+#recommendedPillowContent img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+#recommendedPillowContent p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+#recommendedPillowContent a {
+    background-color: #38a169; /* Tailwindのgreen-500 */
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+#recommendedPillowContent a:hover {
+    background-color: #2f855a; /* Tailwindのgreen-600 */
+}
+
+/* フォームと結果表示のアニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .recommended-pillow {
+        padding: 2rem 1rem;
+    }
+
+    .recommended-pillow h2 {
+        font-size: 2rem;
+    }
+
+    #pillowQuiz {
+        padding: 1.5rem;
+    }
+
+    #quizResult {
+        padding: 1.5rem;
+    }
+
+    #recommendedPillowContent img {
+        max-width: 100%;
+    }
+}
+
+
+div.title-makura {
+    font-family: 'MyFont', sans-serif;
+    color: #d0a900;
+    font-size: 2.5rem;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+    top: 50%;
+    position: absolute;
+}
+
+/* 統合されたアニメーションを適用するクラス */
+.target.frog {
+    transform-origin: center bottom;
+    animation: floating-rotate 6s linear infinite;
+}
+
+/* 統合されたキーフレームの定義 */
+@keyframes floating-rotate {
+    0%, 100% {
+        transform: translateY(-15px);
+    }
+    50% {
+        transform: translateY(15px);
+    }
+}
+
+
+
+
+#text3d {
+    width: 140%;
+    text-align: center;
+    letter-spacing: .15em;
+    text-shadow: 
+      -1px -1px 1px #efede3, 
+      0px 1px 0 #2e2e2e, 
+      0px 2px 0 #2c2c2c, 
+      0px 3px 0 #2a2a2a, 
+      0px 4px 0 #282828, 
+      0px 5px 0 #262626, 
+      0px 6px 0 #242424, 
+      0px 7px 0 #222, 
+      0px 8px 0 #202020, 
+      0px 9px 0 #1e1e1e, 
+      0px 10px 0 #1c1c1c, 
+      0px 11px 0 #1a1a1a, 
+      0px 12px 0 #181818, 
+      0px 13px 0 #161616, 
+      0px 14px 0 #141414, 
+      0px 15px 0 #121212,
+      2px 20px 5px rgba(0, 0, 0, 0.9),
+      5px 23px 5px rgba(0, 0, 0, 0.3),
+      8px 27px 8px rgba(0, 0, 0, 0.5),
+      8px 28px 35px rgba(0, 0, 0, 0.9);
+ }
+
+
 :root {
     --glitter: url("https://assets.codepen.io/13471/silver-glitter-background.png");
     --duration: 6.66s;
@@ -227,6 +461,7 @@
 @media (max-width: 768px) {
     .mobile-only {
         display: block; /* 必要に応じて他の表示プロパティに変更 */
+        padding-top: 100%;
     }
 }
 
@@ -283,13 +518,13 @@
 
 
 
-section:nth-of-type(3) {
+section:nth-of-type(4) {
     position: relative;
     width: 100vw;
     height: 200vh;
     view-timeline-name: --section;
 }
-section:nth-of-type(4) {
+section:nth-of-type(5) {
     position: relative;
     width: 100vw;
     height: 200vh;
@@ -741,6 +976,14 @@ footer {
     /* ここにスタイルを記述 */
     padding-bottom: 10%;
   }
+
+  .item.a {
+    display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;     /* 垂直方向に中央揃え */
+    flex-direction: column;  /* 子要素を縦に並べる */
+    height: 100%;            /* 高さを親要素に合わせる */
+}
   
 /* =========================================
    Additional Styles for Interactivity

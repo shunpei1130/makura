@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>夢重力 - まるで夢の中で浮遊しているような眠り</title>
+    <title>夢重力マクラ(zero-gravity) - まるで夢の中で浮遊しているような眠り</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
@@ -31,21 +31,18 @@
                     <div class="carousel-container relative">
                         <div class="carousel flex space-x-4">
                             <!-- 変更後: data-images に "images/1.jpg", "images/2.jpg", "images/3.jpg" を指定 -->
-                        <div class="item a cursor-pointer" data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
+                        <div class="item a ">
+                            <div class="title-makura text-3xl frog target" id="text3d">夢重力マクラ</div>   
+                            
+                        </div>
+                        <div class="item b " data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
                             <p class="text-center">無重力マクラ 横向き</p>
-                            <img src="yoko.png" alt="夢重力枕 1" class="pillow-image w-full h-auto">
+                            <img src="yoko.png" alt="夢重力枕 2" class="pillow-image w-full h-auto">
                             <button class="cta-button">
                                 <a href="https://square.link/u/nKfRlpkh">今すぐ購入</a>
                             </button>
                         </div>
-                        <div class="item b cursor-pointer" data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
-                            <p class="text-center">無重力マクラ 縦向き</p>
-                            <img src="tate.png" alt="夢重力枕 2" class="pillow-image w-full h-auto">
-                            <button class="cta-button">
-                                <a href="https://square.link/u/GW58fL76">今すぐ購入</a>
-                            </button>
-                        </div>
-                        <div class="item c cursor-pointer" data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
+                        <div class="item c " data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
                             <p class="text-center">無重力マクラ 縦向き</p>
                             <img src="tate1.png" alt="夢重力枕 3" class="pillow-image w-full h-auto">
                             <button class="cta-button">
@@ -76,15 +73,80 @@
                             <!-- スライドはJavaScriptで動的に追加 -->
                         </div>
                         <!-- ナビゲーションボタン -->
-                        <button id="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 cursor-pointer">
+                        <button id="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 ">
                             ＜
                         </button>
-                        <button id="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 cursor-pointer">
+                        <button id="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 ">
                             ＞
                         </button>
                     </div>
                 </div>
             </div>
+
+
+
+            <!-- おすすめ枕診断セクション -->
+<section class="recommended-pillow h-screen py-12" id="recommendedPillow">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-8">おすすめ枕診断</h2>
+        <form id="pillowQuiz" class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <!-- 質問1: 睡眠の姿勢 -->
+            <div class="mb-6">
+                <label class="block text-lg font-semibold mb-2" for="sleepPosition">1. あなたの主な睡眠姿勢は？</label>
+                <div class="flex flex-col space-y-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="sleepPosition" value="back" class="form-radio" required>
+                        <span class="ml-2">仰向け</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="sleepPosition" value="side" class="form-radio">
+                        <span class="ml-2">横向き</span>
+                    </label>
+                </div>
+            </div>
+            <!-- 質問2: 枕の高さ -->
+            <div class="mb-6">
+                <label class="block text-lg font-semibold mb-2" for="pillowHeight">2. 枕の高さはどの程度が好みですか？</label>
+                <div class="flex flex-col space-y-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="pillowHeight" value="low" class="form-radio" required>
+                        <span class="ml-2">低め</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="pillowHeight" value="high" class="form-radio">
+                        <span class="ml-2">高め</span>
+                    </label>
+                </div>
+            </div>
+            <!-- 質問3: 枕の反発力 -->
+            <div class="mb-6">
+                <label class="block text-lg font-semibold mb-2" for="pillowRebound">3. 枕の反発力についてどう感じますか？</label>
+                <div class="flex flex-col space-y-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="pillowRebound" value="soft" class="form-radio" required>
+                        <span class="ml-2">柔らかい方がいい</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="pillowRebound" value="strong" class="form-radio">
+                        <span class="ml-2">反発力が強い方がいい</span>
+                    </label>
+                </div>
+            </div>
+            <!-- 送信ボタン -->
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors">診断する</button>
+            </div>
+        </form>
+        <!-- 結果表示エリア -->
+        <div id="quizResult" class="mt-8 max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg hidden">
+            <h3 class="text-2xl font-bold mb-4">あなたにおすすめの枕は...</h3>
+            <div id="recommendedPillowContent" class="text-lg">
+                <!-- 推奨枕の情報がここに表示されます -->
+            </div>
+        </div>
+    </div>
+</section>
+
       
          
 
@@ -438,47 +500,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
 
     <!-- 頂点シェーダー -->
-    <script id="vertexShader" type="x-shader/x-vertex">
-        void main() {
-            gl_Position = vec4( position, 1.0 );
-        }
-    </script>
+    <!-- 頂点シェーダー -->
+<script id="vertexShader" type="x-shader/x-vertex">
+    void main(){
+        gl_Position = vec4(position, 1.0);
+    }
+</script>
+
     
     <!-- フラグメントシェーダー -->
     <!-- 参考 http://glslsandbox.com/e#58290.6 -->
-    <script id="fragmentShader" type="x-shader/x-fragment">
+    <!-- フラグメントシェーダー -->
+<script id="fragmentShader" type="x-shader/x-fragment">
     // global remix - Del 30/10/2019
     #ifdef GL_ES
     precision highp float;
     #endif
-    
+
     #extension GL_OES_standard_derivatives : enable
-    
+
     uniform float time;
     uniform vec2 mouse;
     uniform vec2 resolution;
-    
+    uniform float u_speed; // 新しいユニフォーム
+    uniform float u_size;  // 新しいユニフォーム
+
     float snow(vec2 uv, float scale) {
-        float _t = time * 0.3;
+        float _t = time * u_speed; // スピード調整
         uv.x += _t / scale; 
-        uv *= scale;
+        uv *= scale * u_size; // サイズ調整
         vec2 s = floor(uv);
         vec2 f = fract(uv);
         vec2 p;
-        float k = 40.0;
+        float k = 40.0 * u_size; // パーティクルの大きさ調整
         float d;
-        p = sin(11.0 * fract(sin((s + p + scale) * mat2(7.0, 3.0, 6.0, 5.0)) * 5.0) ) - f;
+        p = sin(11.0 * fract(sin((s + p + scale) * mat2(7.0, 3.0, 6.0, 5.0)) * 5.0)) - f;
         d = length(p);
         k = min(d, k);
-        k = smoothstep(0.0, k, sin(f.x + f.y) * 0.003); // パーティクルの大きさ
+        k = smoothstep(0.0, k, sin(f.x + f.y) * 0.003 * u_size); // パーティクルの大きさを滑らかに
         return k;
     }
-    
+
     void main(void) {
         vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y); 
-        // uv.x += sin(time * 0.001);
-        // uv.y += sin(uv.x * 1.4) * 0.2;
-        // uv.x *= 0.005;
         float c = 0.0;
         c += snow(uv, 5.0);
         c += snow(uv, 10.0);
@@ -488,73 +552,155 @@
         vec3 finalColor = vec3(0.9, 0.8, 0.99) * c * 30.0;
         gl_FragColor = vec4(finalColor, 1.0);
     }
-    </script>
+</script>
+
 
     <!-- メインスクリプト -->
+    <!-- メインスクリプト -->
+<script>
+    var container;
+    var camera, scene, renderer;
+    var uniforms;
+
+    init();
+    animate();
+
+    function init() {
+        container = document.getElementById('container');
+
+        // カメラの設定
+        camera = new THREE.Camera();
+        camera.position.z = 1;
+
+        // シーンの作成
+        scene = new THREE.Scene();
+
+        // ジオメトリの作成（全画面用）
+        var geometry = new THREE.PlaneBufferGeometry(2, 2);
+
+        // ユニフォームの設定
+        uniforms = {
+            time: { type: "f", value: 1.0 },
+            resolution: { type: "v2", value: new THREE.Vector2() },
+            u_speed: { type: "f", value: 1.0 }, // 初期スピード
+            u_size: { type: "f", value: 1.0 }   // 初期サイズ
+        };
+
+        // シェーダーマテリアルの作成
+        var material = new THREE.ShaderMaterial({
+            uniforms: uniforms,
+            vertexShader: document.getElementById('vertexShader').textContent,
+            fragmentShader: document.getElementById('fragmentShader').textContent
+        });
+
+        // メッシュの作成とシーンへの追加
+        var mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        // レンダラーの作成
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // ウィンドウリサイズ時の処理
+        onWindowResize();
+        window.addEventListener('resize', onWindowResize, false);
+
+        // タップ（クリック）イベントの追加
+        var text3d = document.getElementById('text3d');
+        text3d.addEventListener('click', toggleAnimation);
+    }
+
+    function onWindowResize(event) {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        uniforms.resolution.value.x = renderer.domElement.width;
+        uniforms.resolution.value.y = renderer.domElement.height;
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+    }
+
+    function render() {
+        uniforms.time.value += 0.05;
+        renderer.render(scene, camera);
+    }
+
+    // アニメーションのトグル状態
+    var animationActive = false;
+
+    function toggleAnimation() {
+        if (!animationActive) {
+            // パーティクルのスピードとサイズを増加
+            uniforms.u_speed.value = 2.0; // スピードを2倍に
+            uniforms.u_size.value = 2.0;  // サイズを2倍に
+            animationActive = true;
+        } else {
+            // パーティクルのスピードとサイズを元に戻す
+            uniforms.u_speed.value = 1.0; // スピードを元に
+            uniforms.u_size.value = 1.0;  // サイズを元に
+            animationActive = false;
+        }
+    }
+</script>
     <script>
-        var container;
-        var camera, scene, renderer;
-        var uniforms;
-
-        init();
-        animate();
-
-        function init() {
-            container = document.getElementById('container');
-
-            // カメラの設定
-            camera = new THREE.Camera();
-            camera.position.z = 1;
-
-            // シーンの作成
-            scene = new THREE.Scene();
-
-            // ジオメトリの作成（全画面用）
-            var geometry = new THREE.PlaneBufferGeometry(2, 2);
-
-            // ユニフォームの設定
-            uniforms = {
-                time: { type: "f", value: 1.0 },
-                resolution: { type: "v2", value: new THREE.Vector2() }
-            };
-
-            // シェーダーマテリアルの作成
-            var material = new THREE.ShaderMaterial({
-                uniforms: uniforms,
-                vertexShader: document.getElementById('vertexShader').textContent,
-                fragmentShader: document.getElementById('fragmentShader').textContent
+        $(document).ready(function(){
+            $('#pillowQuiz').on('submit', function(e){
+                e.preventDefault();
+                
+                // ユーザーの回答を取得
+                var sleepPosition = $('input[name="sleepPosition"]:checked').val();
+                var pillowHeight = $('input[name="pillowHeight"]:checked').val();
+                var pillowRebound = $('input[name="pillowRebound"]:checked').val();
+                
+                // 推奨枕のロジック
+                var recommended;
+                
+                if(sleepPosition === 'back' && pillowHeight === 'high' && pillowRebound === 'strong'){
+                    recommended = {
+                        name: "縦用 高反発枕",
+                        description: "仰向けで寝る方に最適な高反発力を持つ枕です。180度回転で2段階の高さ調整が可能で、首と脊椎をしっかりサポートします。",
+                        image: "tate.png",
+                        link: "https://square.link/u/GW58fL76"
+                    };
+                }
+                else if(sleepPosition === 'side'){
+                    recommended = {
+                        name: "横用 サポート枕",
+                        description: "横向きで寝る方に適したサポート力を持つ枕です。高い反発力と適度な高さで肩と首をしっかり支えます。",
+                        image: "yoko.png",
+                        link: "https://square.link/u/nKfRlpkh"
+                    };
+                }
+                else {
+                    // デフォルトのおすすめ
+                    recommended = {
+                        name: "横用 サポート枕",
+                        description: "横向きで寝る方に適したサポート力を持つ枕です。高い反発力と適度な高さで肩と首をしっかり支えます。",
+                        image: "yoko.png",
+                        link: "https://square.link/u/nKfRlpkh"
+                    };
+                }
+                
+                // 結果を表示
+                var resultHTML = `
+                    <h4 class="font-semibold mb-2">${recommended.name}</h4>
+                    <img src="${recommended.image}" alt="${recommended.name}" class="w-full h-auto mb-4 rounded">
+                    <p class="mb-4">${recommended.description}</p>
+                    <a href="${recommended.link}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">今すぐ購入</a>
+                `;
+                
+                $('#recommendedPillowContent').html(resultHTML);
+                $('#quizResult').fadeIn();
+                
+                // スクロールして結果セクションへ
+                $('html, body').animate({
+                    scrollTop: $("#quizResult").offset().top - 20
+                }, 800);
             });
-
-            // メッシュの作成とシーンへの追加
-            var mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-
-            // レンダラーの作成
-            renderer = new THREE.WebGLRenderer();
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
-
-            // ウィンドウリサイズ時の処理
-            onWindowResize();
-            window.addEventListener('resize', onWindowResize, false);
-        }
-
-        function onWindowResize(event) {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            uniforms.resolution.value.x = renderer.domElement.width;
-            uniforms.resolution.value.y = renderer.domElement.height;
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            render();
-        }
-
-        function render() {
-            uniforms.time.value += 0.05;
-            renderer.render(scene, camera);
-        }
+        });
     </script>
     
 </body>
