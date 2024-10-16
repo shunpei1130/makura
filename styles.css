@@ -129,7 +129,7 @@
 }
 
 #recommendedPillowContent a {
-    background-color: #38a169; /* Tailwindのgreen-500 */
+    background-color: #805ad5; /* Tailwindのgreen-500 */
     color: #ffffff;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
@@ -443,6 +443,26 @@ div.title-makura {
 
 }
 
+.ml-2{
+    font-size: 18px;
+}
+
+button.title-button{
+    bottom: -80%;
+    position: relative;
+    min-width: 95%;
+    font-weight: bold;
+}
+
+/* グラデーションテキスト用のクラス */
+.gradient-text {
+    background: linear-gradient(to top, #ffffdb, #a16422); /* 金のグラデーション */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
 
 /* 基本的に全ての要素を非表示にする */
 .desktop-only,
@@ -729,6 +749,9 @@ body {
 }
 
 .pillow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20rem; /* 画像サイズを大きく */
     height: 20rem;
     margin: 5rem auto 3rem;
@@ -1358,16 +1381,38 @@ footer p {
 .next { 
     right: -60%; /* 左側に広げる */
 }
-.cta-button {
+.cta-button2 {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: transparent;
+    color: transparent; /* テキスト色を透明に設定 */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s, text-shadow 0.3s;
+    min-width: 60%;
+    border: 4px solid; /* ボーダー幅を設定 */
+    border-image: linear-gradient(
+        135deg,
+        #704308 0%,
+        #ffce08 37%,
+        #fefeb2 47%,
+        #fafad6 50%,
+        #fefeb2 53%,
+        #e1ce08 63%,
+        #704308 100%
+    ) 1; /* border-image-slice を1に設定 */
+}
+
+button.cta-button {
     padding: 10px 20px;
     font-size: 1em;
     background-color: #805ad5;
-    color: #FFF;
-    border: none;
+    color: white; /* テキスト色を透明に設定 */
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: color 0.3s, text-shadow 0.3s;
     min-width: 60%;
+    border: 4px solid #805ad5; /* ボーダー幅と色を設定 */
 }
 
 .cta-button:hover {

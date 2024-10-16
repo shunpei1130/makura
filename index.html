@@ -33,20 +33,22 @@
                             <!-- 変更後: data-images に "images/1.jpg", "images/2.jpg", "images/3.jpg" を指定 -->
                         <div class="item a ">
                             <div class="title-makura text-3xl frog target" id="text3d">夢重力マクラ</div>   
-                            
-                        </div>
-                        <div class="item b " data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
-                            <p class="text-center">無重力マクラ 横向き</p>
-                            <img src="yoko.png" alt="夢重力枕 2" class="pillow-image w-full h-auto">
-                            <button class="cta-button">
-                                <a href="https://square.link/u/nKfRlpkh">今すぐ購入</a>
+                            <button id="scrollButton" class="cta-button2 title-button transition duration-300 gradient-text">
+                                あなたは縦横どちら？
                             </button>
                         </div>
-                        <div class="item c " data-images='["images/1.jpg", "images/2.jpg", "images/3.jpg"]'>
-                            <p class="text-center">無重力マクラ 縦向き</p>
-                            <img src="tate1.png" alt="夢重力枕 3" class="pillow-image w-full h-auto">
+                        <div class="item b ">
+                            <p class="text-center">無重力マクラ 横向き</p>
+                            <img src="yoko.png" alt="夢重力枕 2" class="pillow-image w-aute h-auto" data-images='["images/1.png", "images/2.png", "images/3.png"]'>
                             <button class="cta-button">
-                                <a href="https://square.link/u/GW58fL76">今すぐ購入</a>
+                                <a href="https://square.link/u/nKfRlpkh">購入</a>
+                            </button>
+                        </div>
+                        <div class="item c ">
+                            <p class="text-center">無重力マクラ 縦向き</p>
+                            <img src="tate.png" alt="夢重力枕 3" class="pillow-image w-full h-auto" data-images='["images/1.png", "images/2.png", "images/3.png"]'>
+                            <button class="cta-button">
+                                <a href="https://square.link/u/GW58fL76">購入</a>
                             </button>
                         </div>
 
@@ -86,66 +88,66 @@
 
 
             <!-- おすすめ枕診断セクション -->
-<section class="recommended-pillow h-screen py-12" id="recommendedPillow">
-    <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-8">おすすめ枕診断</h2>
-        <form id="pillowQuiz" class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <!-- 質問1: 睡眠の姿勢 -->
-            <div class="mb-6">
-                <label class="block text-lg font-semibold mb-2" for="sleepPosition">1. あなたの主な睡眠姿勢は？</label>
-                <div class="flex flex-col space-y-2">
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="sleepPosition" value="back" class="form-radio" required>
-                        <span class="ml-2">仰向け</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="sleepPosition" value="side" class="form-radio">
-                        <span class="ml-2">横向き</span>
-                    </label>
+            <section class="recommended-pillow py-12" id="recommendedPillow">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-8">おすすめ枕診断</h2>
+                    <form id="pillowQuiz" class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                        <!-- 質問1: 睡眠の姿勢 -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold mb-2" for="sleepPosition">1. あなたの主な睡眠姿勢は？</label>
+                            <div class="flex flex-col space-y-2">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="sleepPosition" value="back" class="form-radio" required>
+                                    <span class="ml-2">仰向け</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="sleepPosition" value="side" class="form-radio">
+                                    <span class="ml-2">横向き</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 質問2: 枕の高さ -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold mb-2" for="pillowHeight">2. 枕の高さはどの程度が好みですか？</label>
+                            <div class="flex flex-col space-y-2">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="pillowHeight" value="low" class="form-radio" required>
+                                    <span class="ml-2">低め</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="pillowHeight" value="high" class="form-radio">
+                                    <span class="ml-2">高め</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 質問3: 枕の反発力 -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold mb-2" for="pillowRebound">3. 枕の反発力についてどう感じますか？</label>
+                            <div class="flex flex-col space-y-2">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="pillowRebound" value="soft" class="form-radio" required>
+                                    <span class="ml-2">柔らかい方がいい</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="pillowRebound" value="strong" class="form-radio">
+                                    <span class="ml-2">反発力が強い方がいい</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 送信ボタン -->
+                        <div class="text-center">
+                            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors">診断する</button>
+                        </div>
+                    </form>
+                    <!-- 結果表示エリア -->
+                    <div id="quizResult" class="mt-8 max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg hidden">
+                        <h3 class="text-2xl font-bold mb-4">あなたにおすすめの枕は...</h3>
+                        <div id="recommendedPillowContent" class="text-lg">
+                            <!-- 推奨枕の情報がここに表示されます -->
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- 質問2: 枕の高さ -->
-            <div class="mb-6">
-                <label class="block text-lg font-semibold mb-2" for="pillowHeight">2. 枕の高さはどの程度が好みですか？</label>
-                <div class="flex flex-col space-y-2">
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="pillowHeight" value="low" class="form-radio" required>
-                        <span class="ml-2">低め</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="pillowHeight" value="high" class="form-radio">
-                        <span class="ml-2">高め</span>
-                    </label>
-                </div>
-            </div>
-            <!-- 質問3: 枕の反発力 -->
-            <div class="mb-6">
-                <label class="block text-lg font-semibold mb-2" for="pillowRebound">3. 枕の反発力についてどう感じますか？</label>
-                <div class="flex flex-col space-y-2">
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="pillowRebound" value="soft" class="form-radio" required>
-                        <span class="ml-2">柔らかい方がいい</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="pillowRebound" value="strong" class="form-radio">
-                        <span class="ml-2">反発力が強い方がいい</span>
-                    </label>
-                </div>
-            </div>
-            <!-- 送信ボタン -->
-            <div class="text-center">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors">診断する</button>
-            </div>
-        </form>
-        <!-- 結果表示エリア -->
-        <div id="quizResult" class="mt-8 max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg hidden">
-            <h3 class="text-2xl font-bold mb-4">あなたにおすすめの枕は...</h3>
-            <div id="recommendedPillowContent" class="text-lg">
-                <!-- 推奨枕の情報がここに表示されます -->
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
 
       
          
@@ -645,63 +647,80 @@
         }
     }
 </script>
-    <script>
-        $(document).ready(function(){
-            $('#pillowQuiz').on('submit', function(e){
-                e.preventDefault();
-                
-                // ユーザーの回答を取得
-                var sleepPosition = $('input[name="sleepPosition"]:checked').val();
-                var pillowHeight = $('input[name="pillowHeight"]:checked').val();
-                var pillowRebound = $('input[name="pillowRebound"]:checked').val();
-                
-                // 推奨枕のロジック
-                var recommended;
-                
-                if(sleepPosition === 'back' && pillowHeight === 'high' && pillowRebound === 'strong'){
-                    recommended = {
-                        name: "縦用 高反発枕",
-                        description: "仰向けで寝る方に最適な高反発力を持つ枕です。180度回転で2段階の高さ調整が可能で、首と脊椎をしっかりサポートします。",
-                        image: "tate.png",
-                        link: "https://square.link/u/GW58fL76"
-                    };
-                }
-                else if(sleepPosition === 'side'){
-                    recommended = {
-                        name: "横用 サポート枕",
-                        description: "横向きで寝る方に適したサポート力を持つ枕です。高い反発力と適度な高さで肩と首をしっかり支えます。",
-                        image: "yoko.png",
-                        link: "https://square.link/u/nKfRlpkh"
-                    };
-                }
-                else {
-                    // デフォルトのおすすめ
-                    recommended = {
-                        name: "横用 サポート枕",
-                        description: "横向きで寝る方に適したサポート力を持つ枕です。高い反発力と適度な高さで肩と首をしっかり支えます。",
-                        image: "yoko.png",
-                        link: "https://square.link/u/nKfRlpkh"
-                    };
-                }
-                
-                // 結果を表示
-                var resultHTML = `
-                    <h4 class="font-semibold mb-2">${recommended.name}</h4>
-                    <img src="${recommended.image}" alt="${recommended.name}" class="w-full h-auto mb-4 rounded">
-                    <p class="mb-4">${recommended.description}</p>
-                    <a href="${recommended.link}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">今すぐ購入</a>
-                `;
-                
-                $('#recommendedPillowContent').html(resultHTML);
-                $('#quizResult').fadeIn();
-                
-                // スクロールして結果セクションへ
-                $('html, body').animate({
-                    scrollTop: $("#quizResult").offset().top - 20
-                }, 800);
-            });
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const scrollButton = document.getElementById('scrollButton');
+        const recommendedSection = document.getElementById('recommendedPillow');
+
+        scrollButton.addEventListener('click', function() {
+            recommendedSection.scrollIntoView({ behavior: 'smooth' });
         });
-    </script>
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#pillowQuiz').on('submit', function(e){
+            e.preventDefault();
+            
+            // ユーザーの回答を取得
+            var sleepPosition = $('input[name="sleepPosition"]:checked').val();
+            var pillowHeight = $('input[name="pillowHeight"]:checked').val();
+            var pillowRebound = $('input[name="pillowRebound"]:checked').val();
+            
+            // ポイントの計算
+            var points = 0;
+
+            // ポイントを加算
+            if(sleepPosition === 'back') points += 1;
+            if(pillowHeight === 'low') points += 1;
+            if(pillowRebound === 'soft') points += 1;
+
+            // ポイントを減算
+            if(sleepPosition === 'side') points -= 1;
+            if(pillowHeight === 'high') points -= 1;
+            if(pillowRebound === 'strong') points -= 1;
+
+            // 合計ポイントに基づいて枕を推薦
+            var recommended;
+            if(points > 0){
+                // ポイントが正なら横向きマクラを推薦
+                recommended = {
+                    name: "横向きマクラ",
+                    description: "横向きで寝る方に適したサポート力を持つ枕です。高い反発力と適度な高さで肩と首をしっかり支えます。",
+                    image: "yoko.png",
+                    link: "https://square.link/u/nKfRlpkh"
+                };
+            }
+            else {
+                // ポイントが負なら縦向きマクラを推薦
+                recommended = {
+                    name: "縦向きマクラ",
+                    description: "仰向けで寝る方に最適な高反発力を持つ枕です。180度回転で2段階の高さ調整が可能で、首と脊椎をしっかりサポートします。",
+                    image: "tate.png",
+                    link: "https://square.link/u/GW58fL76"
+                };
+            }
+
+            // 結果を表示
+            var resultHTML = `
+                <h4 class="font-semibold mb-2">${recommended.name}</h4>
+                <img src="${recommended.image}" alt="${recommended.name}" class="w-full h-auto mb-4 rounded">
+                <p class="mb-4">${recommended.description}</p>
+                <a href="${recommended.link}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">購入</a>
+            `;
+            
+            $('#recommendedPillowContent').html(resultHTML);
+            $('#quizResult').fadeIn();
+
+            // スクロールして結果セクションへ
+            $('html, body').animate({
+                scrollTop: $("#quizResult").offset().top - 20
+            }, 800);
+        });
+    });
+</script>
     
 </body>
 </html>

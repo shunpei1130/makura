@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const zoomModal = document.getElementById('zoomModal');
     const closeModal = document.getElementById('closeModal');
-    const items = document.querySelectorAll('.carousel .item');
+    const items = document.querySelectorAll('.carousel .pillow-image');
     const slider = document.querySelector('.slider');
     const prevSlideBtn = document.getElementById('prevSlide');
     const nextSlideBtn = document.getElementById('nextSlide');
@@ -37,7 +37,7 @@ function setSliderImages(images) {
     slider.innerHTML = '';
     images.forEach((src) => {
         const slide = document.createElement('div');
-        slide.classList.add('slide', 'min-w-full', 'flex-shrink-0');
+        slide.classList.add('slide', 'min-w-full');
         const img = document.createElement('img');
         img.src = src; // "images/1.jpg" などのパスが指定されている
         img.alt = "詳細画像";
