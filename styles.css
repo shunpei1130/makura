@@ -471,6 +471,54 @@ button.title-button{
     display: none;
 }
 
+.site-header {
+    display: block;
+}
+
+.site-header nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.site-header nav a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.58);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.25s ease, opacity 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-header nav li:first-child a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f8d36b 0%, #f08d49 100%);
+    color: #1f1304;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    box-shadow: 0 12px 24px rgba(240, 141, 73, 0.28);
+}
+
+.site-header nav li:not(:first-child) a {
+    opacity: 0.72;
+}
+
+.site-header nav li:not(:first-child) a:hover {
+    color: rgba(255, 255, 255, 0.82);
+    opacity: 0.95;
+}
+
+.site-header nav li:first-child a:hover {
+    color: #1f1304;
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px rgba(240, 141, 73, 0.34);
+}
+
 .h-s{
     height: 200vh;
 }
@@ -489,6 +537,30 @@ button.title-button{
 @media (max-width: 768px) {
     .mobile-only {
         display: block; /* 必要に応じて他の表示プロパティに変更 */
+    }
+
+    .site-header nav {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .site-header nav ul {
+        gap: 0.25rem 0.75rem;
+        line-height: 1.3;
+    }
+
+    .site-header nav ul > :not([hidden]) ~ :not([hidden]) {
+        margin-left: 0;
+    }
+
+    .site-header nav a {
+        font-size: 0.72rem;
+        white-space: nowrap;
+    }
+
+    .site-header nav li:first-child a {
+        padding: 0.58rem 0.95rem;
+        letter-spacing: 0.04em;
     }
 }
 

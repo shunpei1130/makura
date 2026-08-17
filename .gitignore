@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+AGENTS.md
+CLAUDE.md
+.env
+.env.local
+.env.*.local
+!.env.example
