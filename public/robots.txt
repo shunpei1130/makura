@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zero-g-makura.com/sitemap.xml
+
+# AI向け公式説明書
+Allow: /llms.txt
+Allow: /llms-full.txt
