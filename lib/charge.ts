@@ -39,7 +39,7 @@ export async function chargeDueTrials(limit = 25): Promise<ChargeResult[]> {
 
     const row = claimed[0];
     const attemptNumber = Number(row.charge_attempts);
-    const idempotencyKey = `trial-charge-${row.id}`;
+    const idempotencyKey = `trial-charge-${row.id}-${attemptNumber}`;
     await sql`
       INSERT INTO payment_attempts (trial_id, attempt_number, status)
       VALUES (${row.id}, ${attemptNumber}, 'processing')
