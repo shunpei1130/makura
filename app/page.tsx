@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import TrialForm from "@/app/components/trial-form";
 import AiFitPrompt from "@/app/components/ai-fit-prompt";
+import LegacyHero from "@/app/components/legacy-hero";
 
 function stringParam(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
@@ -17,7 +18,7 @@ export default async function Home({
   const checkoutCancelled = stringParam(params.checkout) === "cancelled";
 
   return (
-    <main>
+    <main className="legacy-site">
       <header className="topbar">
         <Link href="#hero" className="brand" aria-label="夢重力マクラ ホーム">
           夢重力<span>マクラ</span>
@@ -40,48 +41,7 @@ export default async function Home({
         </div>
       )}
 
-      <section className="hero-section" id="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">30日試眠 / 今日のお支払い 0円</p>
-          <h1>
-            感動したら、<br />
-            <em>返さないでください。</em>
-          </h1>
-          <p className="hero-lead">
-            写真やレビューだけでは、枕のことは分からない。
-            <br />
-            だから、あなたのベッドで30日間寝てみてください。
-          </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="#trial">
-              0円で寝てみる <span>→</span>
-            </a>
-            <span className="microcopy">カード登録のみ。申込時の請求はありません。</span>
-          </div>
-          <div className="hero-proof">
-            <span>30日</span> 使って、気に入らなければ箱に戻して返すだけ。
-          </div>
-        </div>
-        <div className="hero-visual">
-          <div className="hero-orbit hero-orbit-one" />
-          <div className="hero-orbit hero-orbit-two" />
-          <div className="hero-image-frame">
-            <Image
-              src="/makura/tate.png"
-              alt="夢重力マクラ"
-              width={560}
-              height={560}
-              priority
-              className="hero-pillow"
-            />
-          </div>
-          <div className="floating-note floating-note-top">一晩寝れば、分かる。</div>
-          <div className="floating-note floating-note-bottom">
-            <strong>¥0</strong>
-            <span>today</span>
-          </div>
-        </div>
-      </section>
+      <LegacyHero />
 
       <section className="promise-strip" aria-label="試眠の約束">
         <div>

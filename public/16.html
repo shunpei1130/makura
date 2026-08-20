@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="睡眠絶望診断 | 4軸40問の無料睡眠タイプ診断【16タイプ】">
     <meta name="twitter:description" content="睡眠の崩れ方まで見える4軸40問・約5分の無料睡眠タイプ診断です。">
-    <meta name="theme-color" content="#09131d">
+    <meta name="theme-color" content="#08090e">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -131,22 +131,22 @@
     <style>
         :root {
             --font-main: "Zen Maru Gothic", sans-serif;
-            --bg: #09131d;
-            --surface: rgba(12, 22, 35, 0.92);
-            --surface2: rgba(19, 33, 48, 0.96);
-            --surface3: rgba(26, 42, 60, 0.96);
-            --text-main: #eef6ff;
-            --text-sub: #93a6bb;
-            --accent: #7dd3fc;
-            --accent-soft: rgba(125, 211, 252, 0.14);
-            --accent2: #8b5cf6;
-            --line: rgba(146, 172, 205, 0.18);
+            --bg: #08090e;
+            --surface: rgba(18, 17, 26, 0.94);
+            --surface2: rgba(29, 25, 42, 0.96);
+            --surface3: rgba(42, 34, 57, 0.96);
+            --text-main: #f8f1e5;
+            --text-sub: #aaa5b2;
+            --accent: #e6bd65;
+            --accent-soft: rgba(230, 189, 101, 0.14);
+            --accent2: #805ad5;
+            --line: rgba(230, 189, 101, 0.2);
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28);
             --shadow-lg: 0 16px 44px rgba(0, 0, 0, 0.36);
             --radius: 24px;
             --radius-sm: 14px;
-            --danger: #ff7a7a;
-            --warn: #ffd58c
+            --danger: #e98282;
+            --warn: #f2d181
         }
 
         * {
@@ -161,10 +161,10 @@
             color: var(--text-main);
             line-height: 1.7;
             background:
-                radial-gradient(circle at top, rgba(80, 120, 255, 0.22), transparent 34%),
-                radial-gradient(circle at 80% 10%, rgba(125, 211, 252, 0.16), transparent 24%),
-                radial-gradient(circle at 20% 24%, rgba(139, 92, 246, 0.14), transparent 20%),
-                linear-gradient(180deg, #08121c 0%, #09131d 42%, #0b1521 100%);
+                radial-gradient(circle at top, rgba(230, 189, 101, 0.12), transparent 34%),
+                radial-gradient(circle at 80% 10%, rgba(128, 90, 213, 0.2), transparent 24%),
+                radial-gradient(circle at 20% 24%, rgba(128, 90, 213, 0.16), transparent 20%),
+                linear-gradient(180deg, #08090e 0%, #0b0a12 42%, #100c18 100%);
         }
 
         body::before {
@@ -208,13 +208,13 @@
         }
 
         button.primary {
-            background: linear-gradient(135deg, #59c7ff, #8577ff);
+            background: linear-gradient(135deg, #8d63d8, #5e3a9e);
             color: #fff;
-            box-shadow: 0 8px 22px rgba(89, 199, 255, 0.28)
+            box-shadow: 0 8px 22px rgba(128, 90, 213, 0.3)
         }
 
         button.primary:hover {
-            box-shadow: 0 10px 28px rgba(89, 199, 255, 0.34)
+            box-shadow: 0 10px 28px rgba(128, 90, 213, 0.4)
         }
 
         button.danger {
@@ -257,8 +257,8 @@
             border-radius: 18px;
             position: relative;
             flex: 0 0 auto;
-            background: linear-gradient(145deg, rgba(125, 211, 252, 0.35), rgba(139, 92, 246, 0.85));
-            box-shadow: 0 12px 30px rgba(85, 120, 255, 0.24)
+            background: linear-gradient(145deg, rgba(230, 189, 101, 0.45), rgba(128, 90, 213, 0.88));
+            box-shadow: 0 12px 30px rgba(128, 90, 213, 0.3)
         }
 
         .logo::before {
@@ -274,7 +274,7 @@
             position: absolute;
             inset: 11px 9px 11px 17px;
             border-radius: 50%;
-            background: linear-gradient(180deg, #09131d 0%, #142538 100%)
+            background: linear-gradient(180deg, #08090e 0%, #2a2239 100%)
         }
 
         .title h1 {
@@ -344,7 +344,7 @@
             width: 220px;
             height: 220px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(125, 211, 252, 0.14), transparent 70%);
+            background: radial-gradient(circle, rgba(230, 189, 101, 0.16), transparent 70%);
             pointer-events: none
         }
 
@@ -355,7 +355,7 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.14), transparent 68%);
+            background: radial-gradient(circle, rgba(128, 90, 213, 0.2), transparent 68%);
             pointer-events: none
         }
 
@@ -451,11 +451,11 @@
         }
 
         .likert-labels .left {
-            color: #7dd3fc
+            color: #e6bd65
         }
 
         .likert-labels .right {
-            color: #a78bfa
+            color: #b79be9
         }
 
         .likert-buttons {
@@ -506,7 +506,7 @@
         }
 
         .likert-btn.left {
-            border-color: rgba(125, 211, 252, 0.78)
+            border-color: rgba(230, 189, 101, 0.78)
         }
 
         .likert-btn.mid {
@@ -514,13 +514,13 @@
         }
 
         .likert-btn.right {
-            border-color: rgba(167, 139, 250, 0.76)
+            border-color: rgba(183, 155, 233, 0.76)
         }
 
         .likert-btn.selected {
-            background: rgba(125, 211, 252, 0.28);
-            box-shadow: 0 0 0 6px rgba(125, 211, 252, 0.12);
-            border-color: rgba(125, 211, 252, 0.92)
+            background: rgba(230, 189, 101, 0.28);
+            box-shadow: 0 0 0 6px rgba(230, 189, 101, 0.12);
+            border-color: rgba(230, 189, 101, 0.92)
         }
 
         .likert-btn:active {
@@ -653,7 +653,7 @@
             border: 3px solid var(--surface);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 4px 12px rgba(125, 211, 252, 0.3)
+            box-shadow: 0 4px 12px rgba(230, 189, 101, 0.3)
         }
 
         .axis-help {
@@ -677,8 +677,8 @@
         }
 
         .result-section.command {
-            background: linear-gradient(145deg, rgba(255, 213, 140, 0.12), rgba(255, 255, 255, 0.04));
-            border-color: rgba(255, 213, 140, 0.2)
+            background: linear-gradient(145deg, rgba(230, 189, 101, 0.14), rgba(128, 90, 213, 0.08));
+            border-color: rgba(230, 189, 101, 0.24)
         }
 
         .section-label {
@@ -690,7 +690,7 @@
         }
 
         .result-section.command .section-label {
-            color: #ffd58c
+            color: #f2d181
         }
 
         .section-body {
@@ -752,16 +752,16 @@
             min-height: 48px;
             padding: 0 22px;
             border-radius: 999px;
-            background: linear-gradient(135deg, #59c7ff, #8577ff);
+            background: linear-gradient(135deg, #8d63d8, #5e3a9e);
             color: #fff;
             font-size: 14px;
             font-weight: 700;
-            box-shadow: 0 8px 22px rgba(89, 199, 255, 0.28)
+            box-shadow: 0 8px 22px rgba(128, 90, 213, 0.3)
         }
 
         .purchase-link:hover {
             color: #fff;
-            box-shadow: 0 10px 28px rgba(89, 199, 255, 0.34)
+            box-shadow: 0 10px 28px rgba(128, 90, 213, 0.4)
         }
 
         .purchase-note {
@@ -956,8 +956,8 @@
             width: 30px;
             height: 30px;
             border-radius: 999px;
-            background: linear-gradient(135deg, #59c7ff, #7dd3fc);
-            color: #06213a;
+            background: linear-gradient(135deg, #e6bd65, #b87831);
+            color: #1b1107;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
@@ -967,7 +967,7 @@
         }
 
         .type-guide-chip-alt {
-            background: linear-gradient(135deg, #b594ff, #7f76ff);
+            background: linear-gradient(135deg, #9063df, #5e36ae);
             color: #fff
         }
 
