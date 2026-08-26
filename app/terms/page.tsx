@@ -3,16 +3,32 @@ import Link from "next/link";
 export default function TermsPage() {
   return (
     <main className="dashboard-page">
-      <header className="simple-header"><Link href="/" className="brand">夢重力<span>マクラ</span></Link><Link href="/">トップへ戻る</Link></header>
+      <header className="simple-header">
+        <Link href="/" className="brand">夢重力<span>マクラ</span></Link>
+        <Link href="/">トップへ戻る</Link>
+      </header>
       <article className="return-page-wrap">
-        <p className="eyebrow">TERMS / RETURN POLICY</p>
-        <h1>30日試眠の<br /><em>利用条件</em></h1>
-        <p>以下は実装用の確認ページです。本番公開前に、販売事業者情報、返品送料、配送条件、決済失敗時の対応、特商法表記を確定した正式な規約へ差し替えてください。</p>
+        <p className="eyebrow">PURCHASE GUIDE</p>
+        <h1>購入前の<br /><em>ご案内</em></h1>
+        <p>
+          商品ページに表示される内容と、購入前の最終確認画面をご確認のうえ、お申し込みください。
+          このページは購入導線の案内です。
+        </p>
         <div className="dashboard-panel" style={{ marginTop: 28 }}>
-          <h2>試眠と決済</h2>
-          <ol className="check-list"><li>申込時の支払いは0円です。カード情報をStripeで登録します。</li><li>試用終了日までに返却申請が完了しなかった場合、13,480円（税込）を一度だけ決済します。</li><li>決済失敗時はメールで案内し、再決済またはカード更新の手続きを案内します。</li></ol>
-          <h2 style={{ marginTop: 32 }}>返却</h2>
-          <ol className="check-list"><li>届いた箱を返却に使用してください。</li><li>マイページから期限内に返却申請を行い、受付番号を取得してください。</li><li>返送先、送料負担、返品受付条件は本番運用開始前に確定して表示します。</li></ol>
+          <h2>購入について</h2>
+          <ol className="check-list">
+            <li>夢重力マクラは、仰向け中心の縦向きタイプと、横向き中心の横向きタイプから選べます。</li>
+            <li>販売価格は各タイプ13,480円（税込）の一回払いです。</li>
+            <li>購入ボタンからSquareの商品ページへ移動し、商品内容と購入条件を確認して決済します。</li>
+          </ol>
+          <h2 style={{ marginTop: 32 }}>配送・返品について</h2>
+          <p>
+            配送時期、返品・交換条件、送料、販売事業者情報などは、購入前にSquareの商品ページおよび
+            そこに表示される正式な案内をご確認ください。
+          </p>
+          <p style={{ marginTop: 18 }}>
+            <Link href="/#purchase" className="ai-source-link">購入タイプを選ぶ →</Link>
+          </p>
         </div>
       </article>
     </main>

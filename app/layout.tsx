@@ -7,11 +7,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "夢重力マクラ | 感動したら、返さないでください。",
   description:
-    "夢重力マクラを30日間、あなたのベッドでお試しください。今日のお支払いは0円。気に入らなければ箱に戻して返すだけです。",
+    "夢重力マクラを、あなたの寝姿勢に合わせて選んで購入。TPEハニカム構造と高さ設計で、毎日の睡眠を支えます。",
   metadataBase: new URL(process.env.APP_URL || "http://localhost:3000"),
   openGraph: {
     title: "感動したら、返さないでください。",
-    description: "30日間、あなたのベッドで試せる夢重力マクラ。",
+    description: "寝姿勢に合わせて選べる夢重力マクラ。Squareで13,480円（税込）の一回購入。",
     type: "website",
   },
 };

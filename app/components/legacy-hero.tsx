@@ -91,7 +91,7 @@ export default function LegacyHero() {
   return (
     <section className="legacy-hero" id="hero">
       <div className="legacy-hero-copy">
-        <p className="legacy-kicker">ZERO GRAVITY SLEEP / 30-DAY HOME TRIAL</p>
+        <p className="legacy-kicker">ZERO GRAVITY SLEEP / ONE-TIME PURCHASE</p>
         <h1 className="legacy-title" aria-live="polite">
           <span>{typedTop}</span>
           <i className="legacy-cursor" aria-hidden="true" />
@@ -102,15 +102,15 @@ export default function LegacyHero() {
           <strong>返さないでください。</strong>
         </div>
         <p className="legacy-lead">
-          触ってみてほしい。いや、30日寝てみてほしい。
+          触ってみてほしい。いや、一晩寝てみてほしい。
           <br />
-          今日のお支払いは0円。あなたのベッドで試せます。
+          今日から、あなたのベッドへ。
         </p>
         <div className="legacy-actions">
-          <a className="legacy-cta" href="#trial">
-            0円で寝てみる <span>→</span>
+          <a className="legacy-cta" href="#purchase">
+            13,480円で購入 <span>→</span>
           </a>
-          <span className="legacy-note">カード登録のみ / 申込時の請求なし</span>
+          <span className="legacy-note">Squareで決済 / 一回払い</span>
         </div>
       </div>
 
@@ -147,7 +147,7 @@ export default function LegacyHero() {
         </div>
         <div className="legacy-visual-caption">
           <span>一晩寝れば、分かる。</span>
-          <strong>¥0 <small>today</small></strong>
+          <strong>¥13,480 <small>one-time</small></strong>
         </div>
       </div>
 
@@ -160,7 +160,7 @@ export default function LegacyHero() {
             <div className="legacy-gallery-grid">
               {activeDetails.map((src) => <Image key={src} src={src} alt="夢重力マクラの詳細" width={420} height={420} />)}
             </div>
-            <a className="legacy-cta" href="#trial" onClick={() => setDetailIndex(null)}>30日試眠を申し込む <span>→</span></a>
+            <a className="legacy-cta" href="#purchase" onClick={() => setDetailIndex(null)}>購入タイプを選ぶ <span>→</span></a>
           </div>
         </div>
       )}
