@@ -1,23 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const slides = [
   {
-    label: "無重力マクラ 横向き",
+    label: "夢重力マクラ 横向き",
     image: "/makura/yoko.png",
     detailImages: ["/makura/images/1.png", "/makura/images/2.png", "/makura/images/3.png"],
   },
   {
-    label: "夢重力マクラ",
+    label: "夢重力マクラ 縦向き",
     image: "/makura/tate.png",
     detailImages: ["/makura/images/2.png", "/makura/images/3.png", "/makura/images/1.png"],
-  },
-  {
-    label: "TPE ハニカム構造",
-    image: "/makura/hani.png",
-    detailImages: ["/makura/hani.png", "/makura/images/1.png", "/makura/images/2.png"],
   },
 ] as const;
 
@@ -27,16 +22,9 @@ const typeLines = [
 ] as const;
 
 export default function LegacyHero() {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [typedTop, setTypedTop] = useState<string>(typeLines[0].top);
-  const [typedBottom, setTypedBottom] = useState<string>(typeLines[0].bottom);
   const [detailIndex, setDetailIndex] = useState<number | null>(null);
-
-  const activeSlide = slides[activeIndex];
-  const activeDetails = useMemo(
-    () => (detailIndex === null ? [] : slides[detailIndex].detailImages),
-    [detailIndex],
-  );
+  const [typedTop, setTypedTop] = useState("");
+  const [typedBottom, setTypedBottom] = useState("");
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -53,8 +41,7 @@ export default function LegacyHero() {
 
     const timer = window.setInterval(() => {
       const line = typeLines[lineIndex];
-      const fullTop = line.top;
-      const fullBottom = line.bottom;
+      const length = Math.max(line.top.length, line.bottom.length);
 
       if (pause > 0) {
         pause -= 1;
@@ -63,18 +50,18 @@ export default function LegacyHero() {
 
       if (!deleting) {
         characterIndex += 1;
-        setTypedTop(fullTop.slice(0, characterIndex));
-        setTypedBottom(fullBottom.slice(0, Math.min(characterIndex, fullBottom.length)));
-        if (characterIndex >= Math.max(fullTop.length, fullBottom.length)) {
-          pause = 18;
+        setTypedTop(line.top.slice(0, characterIndex));
+        setTypedBottom(line.bottom.slice(0, characterIndex));
+        if (characterIndex >= length) {
+          pause = 16;
           deleting = true;
         }
         return;
       }
 
       characterIndex -= 1;
-      setTypedTop(fullTop.slice(0, Math.max(characterIndex, 0)));
-      setTypedBottom(fullBottom.slice(0, Math.min(Math.max(characterIndex, 0), fullBottom.length)));
+      setTypedTop(line.top.slice(0, Math.max(characterIndex, 0)));
+      setTypedBottom(line.bottom.slice(0, Math.max(characterIndex, 0)));
       if (characterIndex <= 0) {
         deleting = false;
         lineIndex = (lineIndex + 1) % typeLines.length;
@@ -84,86 +71,78 @@ export default function LegacyHero() {
     return () => window.clearInterval(timer);
   }, []);
 
-  function moveSlide(direction: number) {
-    setActiveIndex((current) => (current + direction + slides.length) % slides.length);
-  }
+  const activeSlide = detailIndex === null ? null : slides[detailIndex];
 
   return (
-    <section className="legacy-hero" id="hero">
-      <div className="legacy-hero-copy">
-        <p className="legacy-kicker">ZERO GRAVITY SLEEP / ONE-TIME PURCHASE</p>
-        <h1 className="legacy-title" aria-live="polite">
-          <span>{typedTop}</span>
-          <i className="legacy-cursor" aria-hidden="true" />
-          <small>{typedBottom}</small>
-        </h1>
-        <div className="legacy-message">
-          <span>感動したら、</span>
-          <strong>返さないでください。</strong>
-        </div>
-        <p className="legacy-lead">
-          触ってみてほしい。いや、一晩寝てみてほしい。
-          <br />
-          今日から、あなたのベッドへ。
-        </p>
-        <div className="legacy-actions">
-          <a className="legacy-cta" href="#purchase">
-            13,480円で購入 <span>→</span>
+    <>
+      <section className="legacy-hero" id="hero">
+        <div className="legacy-hero-stars" aria-hidden="true" />
+        <div className="legacy-hero-center">
+          <p className="legacy-kicker">ZERO GRAVITY SLEEP</p>
+          <h1 className="legacy-title" aria-live="polite">
+            <span>{typedTop}</span>
+            <i className="legacy-cursor" aria-hidden="true" />
+            <small>{typedBottom}</small>
+          </h1>
+          <p className="legacy-hero-copyline">TPEハニカム構造で、眠りを軽く。</p>
+          <a className="legacy-scroll-cta" href="#recommendedPillow">
+            あなたは縦横どちら？ <span>↓</span>
           </a>
-          <span className="legacy-note">Squareで決済 / 一回払い</span>
         </div>
-      </div>
+        <div className="legacy-hero-glow" aria-hidden="true" />
+      </section>
 
-      <div className="legacy-hero-visual" aria-label="夢重力マクラのギャラリー">
-        <div className="legacy-orbit legacy-orbit-one" aria-hidden="true" />
-        <div className="legacy-orbit legacy-orbit-two" aria-hidden="true" />
-        <div className="legacy-carousel">
-          <button className="legacy-carousel-button legacy-carousel-prev" type="button" onClick={() => moveSlide(-1)} aria-label="前の枕を見る">
-            ‹
-          </button>
-          <div className="legacy-carousel-stage">
-            {slides.map((slide, index) => {
-              const offset = (index - activeIndex + slides.length) % slides.length;
-              const position = offset === 0 ? "active" : offset === 1 ? "next" : "prev";
-              return (
-                <button
-                  className={`legacy-slide legacy-slide-${position}`}
-                  key={slide.label}
-                  type="button"
-                  onClick={() => (position === "active" ? setDetailIndex(index) : setActiveIndex(index))}
-                  aria-label={`${slide.label}の詳細を見る`}
-                  aria-current={position === "active" ? "true" : undefined}
-                >
-                  <span className="legacy-slide-glow" aria-hidden="true" />
-                  <Image src={slide.image} alt="" width={440} height={440} priority={position === "active"} />
-                  <span>{slide.label}</span>
-                </button>
-              );
-            })}
+      <section className="legacy-gallery-section" id="gallery">
+        <div className="legacy-section-inner">
+          <div className="legacy-gallery-cards">
+            <article className="legacy-gallery-intro-card">
+              <p className="legacy-kicker">DREAM WEIGHT</p>
+              <h2>夢重力<br />マクラ</h2>
+              <p>触ってみてほしい。<br />いや、一晩寝てみてほしい。</p>
+              <a className="legacy-gold-link" href="#recommendedPillow">おすすめを診断する →</a>
+            </article>
+
+            {slides.map((slide, index) => (
+              <button
+                className="legacy-gallery-card"
+                key={slide.label}
+                type="button"
+                onClick={() => setDetailIndex(index)}
+                aria-label={`${slide.label}の詳細を見る`}
+              >
+                <span className="legacy-gallery-card-glow" aria-hidden="true" />
+                <span className="legacy-gallery-card-label">{slide.label}</span>
+                <Image src={slide.image} alt={slide.label} width={420} height={420} />
+                <span className="legacy-gallery-card-link">詳細を見る ↗</span>
+              </button>
+            ))}
           </div>
-          <button className="legacy-carousel-button legacy-carousel-next" type="button" onClick={() => moveSlide(1)} aria-label="次の枕を見る">
-            ›
-          </button>
         </div>
-        <div className="legacy-visual-caption">
-          <span>一晩寝れば、分かる。</span>
-          <strong>¥13,480 <small>one-time</small></strong>
-        </div>
-      </div>
+      </section>
 
-      {detailIndex !== null && (
-        <div className="legacy-gallery-modal" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setDetailIndex(null)}>
+      {activeSlide && (
+        <div
+          className="legacy-gallery-modal"
+          role="presentation"
+          onMouseDown={(event) => event.target === event.currentTarget && setDetailIndex(null)}
+        >
           <div className="legacy-gallery-dialog" role="dialog" aria-modal="true" aria-label="枕の詳細画像">
-            <button className="legacy-gallery-close" type="button" onClick={() => setDetailIndex(null)} aria-label="詳細画像を閉じる">×</button>
+            <button className="legacy-gallery-close" type="button" onClick={() => setDetailIndex(null)} aria-label="詳細画像を閉じる">
+              ×
+            </button>
             <p className="legacy-kicker">DETAIL GALLERY</p>
             <h2>{activeSlide.label}</h2>
             <div className="legacy-gallery-grid">
-              {activeDetails.map((src) => <Image key={src} src={src} alt="夢重力マクラの詳細" width={420} height={420} />)}
+              {activeSlide.detailImages.map((src) => (
+                <Image key={src} src={src} alt={`${activeSlide.label}の詳細`} width={420} height={420} />
+              ))}
             </div>
-            <a className="legacy-cta" href="#purchase" onClick={() => setDetailIndex(null)}>購入タイプを選ぶ <span>→</span></a>
+            <a className="legacy-cta" href="#recommendedPillow" onClick={() => setDetailIndex(null)}>
+              おすすめを診断する <span>→</span>
+            </a>
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 }
