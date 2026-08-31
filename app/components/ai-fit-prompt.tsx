@@ -1,131 +1,152 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import type { PillowQuizResult } from "@/app/components/pillow-quiz";
-
-const quizStorageKey = "yumeggravity-pillow-quiz";
-
-const recommendationLabels = {
-  vertical: "仰向け中心・縦向きタイプ",
-  horizontal: "横向き中心・横向きタイプ",
-} as const;
+import { useMemo, useState } from "react";
 
 const providers = [
   {
-    name: "ChatGPT",
+    name: "ChatGPTで聞く",
     href: (prompt: string) => `https://chatgpt.com/?q=${encodeURIComponent(prompt)}`,
   },
   {
-    name: "Gemini",
+    name: "Geminiで聞く",
     href: (prompt: string) => `https://gemini.google.com/app?prompt=${encodeURIComponent(prompt)}`,
   },
   {
-    name: "Claude",
+    name: "Claudeで聞く",
     href: (prompt: string) => `https://claude.ai/new?q=${encodeURIComponent(prompt)}`,
   },
   {
-    name: "Perplexity",
+    name: "Perplexityで聞く",
     href: (prompt: string) => `https://www.perplexity.ai/search/new?q=${encodeURIComponent(prompt)}`,
   },
 ] as const;
 
-function buildPrompt(diagnosis: PillowQuizResult | null) {
-  const diagnosisContext = diagnosis
-    ? `
-おすすめ枕診断の結果:
-- 判定: ${recommendationLabels[diagnosis.recommendation]}
-- 主な睡眠姿勢: ${diagnosis.answers.sleepPosition === "back" ? "仰向け" : "横向き"}
-- 好みの高さ: ${diagnosis.answers.pillowHeight === "low" ? "低め" : "高め"}
-- 好みの反発力: ${diagnosis.answers.pillowRebound === "soft" ? "柔らかめ" : "反発力が強め"}
-`
-    : `
-まだおすすめ枕診断をしていません。必要なら、主な睡眠姿勢・好みの高さ・反発力を最初に質問してください。
-`;
-
-  return `夢重力マクラについて、私の睡眠傾向に合う理由と合わない可能性を説明してください。
-
-公式情報は、次の公式知識ファイルを優先して参照してください。
-https://zero-g-makura.com/llms-full.txt
-${diagnosisContext}
-現在の購入情報:
-- 価格: 13,480円（税込）の一回購入
-- 仰向け中心・縦向きタイプ: https://square.link/u/GW58fL76
-- 横向き中心・横向きタイプ: https://square.link/u/nKfRlpkh
-
-公式情報に書かれている特徴と、私の情報から考えられる相性を分けて説明してください。医療診断や治療効果は断定せず、合わない可能性や高さ・姿勢の確認ポイントも簡潔に伝えてください。`;
-}
-
 export default function AiFitPrompt() {
-  const [diagnosis, setDiagnosis] = useState<PillowQuizResult | null>(null);
+  const [position, setPosition] = useState("仰向けが多い");
+  const [height, setHeight] = useState("普通");
+  const [hardness, setHardness] = useState("普通");
   const [copied, setCopied] = useState(false);
-  const prompt = useMemo(() => buildPrompt(diagnosis), [diagnosis]);
 
-  useEffect(() => {
-    try {
-      const stored = window.sessionStorage.getItem(quizStorageKey);
-      if (stored) setDiagnosis(JSON.parse(stored) as PillowQuizResult);
-    } catch {
-      // Keep the generic prompt when storage is unavailable.
-    }
+  const promptText = useMemo(() => {
+    return `夢重力マクラを購入しようとしています。
 
-    const handleResult = (event: Event) => {
-      const nextResult = (event as CustomEvent<PillowQuizResult>).detail;
-      if (nextResult) setDiagnosis(nextResult);
-    };
+以下の2種類があります。
+・仰向け中心・縦向きタイプ
+・横向き中心・横向きタイプ
 
-    window.addEventListener("pillow-quiz-result", handleResult);
-    return () => window.removeEventListener("pillow-quiz-result", handleResult);
-  }, []);
+私に合う方を判断してください。
+
+私の寝姿勢：${position}
+好きな枕の高さ：${height}
+好きな硬さ：${hardness}
+
+必要であれば追加で質問してください。`;
+  }, [position, height, hardness]);
 
   async function copyPrompt() {
     try {
-      await navigator.clipboard.writeText(prompt);
+      await navigator.clipboard.writeText(promptText);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
     }
   }
 
   async function openProvider(href: string) {
-    window.open(href, "_blank", "noopener,noreferrer");
     try {
-      await navigator.clipboard.writeText(prompt);
+      await navigator.clipboard.writeText(promptText);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      setCopied(false);
-      // The provider can still be used when clipboard access is unavailable.
+      // Proceed even if clipboard fails
     }
+    window.open(href, "_blank", "noopener,noreferrer");
   }
 
   return (
-    <div className="ai-prompt-card legacy-section-inner">
-      <div className="ai-prompt-copy">
-        <p className="legacy-kicker">ASK AI / OFFICIAL KNOWLEDGE</p>
-        <h2>この枕が、<br /><em>あなたに合う理由。</em></h2>
-        <p>
-          診断結果と公式知識をAIへ渡して、あなたの眠りとの相性を整理できます。
-          AIを選ぶと質問文をコピーしながら開くので、プロンプト欄を確認して送信するだけです。
+    <div className="ai-prompt-card legacy-section-inner" style={{ padding: "3rem 1.5rem", background: "rgba(255,255,255,0.03)", borderRadius: "24px", border: "1px solid rgba(255,255,255,0.1)" }}>
+      <div className="ai-prompt-copy" style={{ textAlign: "center", marginBottom: "2rem" }}>
+        <p className="legacy-kicker" style={{ color: "#ffd700" }}>ASK YOUR OWN AI</p>
+        <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.2rem)", margin: "0.5rem 0 0.8rem" }}>
+          迷ったら、<br />
+          <em style={{ color: "#ffd700", fontStyle: "normal" }}>AIに聞いてみてください。</em>
+        </h2>
+        <p style={{ opacity: 0.85, maxWidth: "600px", margin: "0 auto", fontSize: "0.95rem" }}>
+          下の条件を選ぶだけ。いつも使っているAIがあなたに合うタイプを教えてくれます。
         </p>
-        <Link href="/llms-full.txt" className="ai-source-link">
-          AI向け公式説明書を読む →
-        </Link>
       </div>
-      <div className="ai-prompt-box">
-        <div className="ai-prompt-box-head">
-          <span>{diagnosis ? "診断結果入りプロンプト" : "質問プロンプト"}</span>
-          <button type="button" className="copy-button" onClick={copyPrompt}>
-            {copied ? "コピーしました" : "質問文をコピー"}
+
+      <div className="ai-selector-box" style={{ maxWidth: "680px", margin: "0 auto 1.5rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1rem" }}>
+        <div style={{ background: "rgba(255,255,255,0.05)", padding: "0.8rem 1rem", borderRadius: "12px" }}>
+          <label style={{ display: "block", fontSize: "0.8rem", color: "#ffd700", marginBottom: "0.4rem" }}>寝姿勢</label>
+          <select 
+            value={position} 
+            onChange={(e) => setPosition(e.target.value)}
+            style={{ width: "100%", background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.2)", padding: "0.4rem", borderRadius: "6px" }}
+          >
+            <option value="仰向けが多い">仰向けが多い</option>
+            <option value="横向きが多い">横向きが多い</option>
+            <option value="寝返りが多い・半々">寝返りが多い・半々</option>
+          </select>
+        </div>
+
+        <div style={{ background: "rgba(255,255,255,0.05)", padding: "0.8rem 1rem", borderRadius: "12px" }}>
+          <label style={{ display: "block", fontSize: "0.8rem", color: "#ffd700", marginBottom: "0.4rem" }}>枕の高さ</label>
+          <select 
+            value={height} 
+            onChange={(e) => setHeight(e.target.value)}
+            style={{ width: "100%", background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.2)", padding: "0.4rem", borderRadius: "6px" }}
+          >
+            <option value="低め">低め</option>
+            <option value="普通">普通</option>
+            <option value="高め">高め</option>
+          </select>
+        </div>
+
+        <div style={{ background: "rgba(255,255,255,0.05)", padding: "0.8rem 1rem", borderRadius: "12px" }}>
+          <label style={{ display: "block", fontSize: "0.8rem", color: "#ffd700", marginBottom: "0.4rem" }}>好みの硬さ</label>
+          <select 
+            value={hardness} 
+            onChange={(e) => setHardness(e.target.value)}
+            style={{ width: "100%", background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.2)", padding: "0.4rem", borderRadius: "6px" }}
+          >
+            <option value="柔らかめ">柔らかめ</option>
+            <option value="普通">普通</option>
+            <option value="やや硬め">やや硬め</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="ai-prompt-box" style={{ maxWidth: "680px", margin: "0 auto", background: "rgba(0,0,0,0.3)", borderRadius: "16px", padding: "1.2rem", border: "1px solid rgba(255,255,255,0.15)", display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center" }}>
+        <div className="ai-prompt-box-head" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <button 
+            type="button" 
+            className="copy-button mobile-full-width" 
+            onClick={copyPrompt}
+            style={{ background: "#ffd700", color: "#111", border: "none", padding: "0.6rem 1.4rem", borderRadius: "20px", fontWeight: "bold", cursor: "pointer", fontSize: "0.9rem" }}
+          >
+            {copied ? "✓ 質問文をコピーしました" : "📋 AIへの質問文をコピー"}
           </button>
         </div>
-        <pre>{prompt}</pre>
-        <div className="ai-links" role="group" aria-label="質問先のAIサービス">
-          <span>{copied ? "コピー済み" : "AIを選んで開く"}</span>
+
+        <div className="ai-links" style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
           {providers.map((provider) => (
-            <button key={provider.name} type="button" onClick={() => openProvider(provider.href(prompt))}>
-              {provider.name}
+            <button 
+              key={provider.name} 
+              type="button" 
+              onClick={() => openProvider(provider.href(promptText))}
+              style={{
+                background: "rgba(255,255,255,0.1)",
+                color: "#fff",
+                border: "1px solid rgba(255,255,255,0.2)",
+                padding: "0.55rem 1.1rem",
+                borderRadius: "20px",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+                transition: "all 0.2s"
+              }}
+            >
+              {provider.name} →
             </button>
           ))}
         </div>
@@ -133,3 +154,4 @@ export default function AiFitPrompt() {
     </div>
   );
 }
+
