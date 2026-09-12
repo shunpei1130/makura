@@ -1,28 +1,20 @@
+import Link from "next/link";
 export default function WhyRefund() {
   return (
-    <section className="legacy-section why-refund-section" id="why-refund">
-      <div className="legacy-section-inner why-refund-inner">
-        <p className="legacy-kicker">WHY 30 DAYS?</p>
-        <h2 className="why-refund-title">
-          なぜ、返品OKにしているのか。
-        </h2>
-        <div className="why-refund-body">
-          <p className="why-refund-lead">
-            <strong>使えば分かる、と本気で思っているからです。</strong>
-          </p>
-          <p>
-            枕の良し悪しは、数分触っても分かりません。<br />
-            一晩寝ても足りません。<br />
-            毎晩、自分のベッドで使って初めて分かります。
-          </p>
-          <p>
-            だから30日。
-          </p>
-          <p className="why-refund-highlight">
-            それでも合わなければ、遠慮なく返してください。<br />
-            全額お返しします。
-          </p>
-        </div>
+    <section className="legacy-section" id="why-refund">
+      <div
+        className="legacy-section-inner"
+        style={{ maxWidth: 800, padding: "3rem 1.5rem" }}
+      >
+        <p className="legacy-kicker">TRY AT HOME</p>
+        <h2>使ってから、決めてください。</h2>
+        <p>
+          枕の使い心地は、自宅で眠って確かめるのがいちばん。本日の商品代は0円。気に入ったら、そのまま使い続けるだけです。
+        </p>
+        <p>
+          返さなければ申込から30日後に13,480円を登録カードへ自動請求します。期限内に申請・返送し、当社が受領・承認すれば商品代は請求しません。返品送料はお客様負担です。
+        </p>
+        <Link href="/return">返品方法を先に見る →</Link>
       </div>
     </section>
   );

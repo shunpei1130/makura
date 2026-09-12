@@ -8,3 +8,7 @@ CLAUDE.md
 .env.local
 .env.*.local
 !.env.example
+
+.vercel
+.env*
+!.env.example

@@ -1,0 +1,7 @@
+edited_tiktok_assets/
+.env*
+!.env.example
+tests/
+docs/
+scripts/
+*.tsbuildinfo
