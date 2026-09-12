@@ -44,6 +44,19 @@ const filters: Record<string, { label: string; where: string }> = {
     where: "return_review_status='rejected' AND redelivery_tracking IS NULL",
   },
 };
+const reviewLabels: Record<string, string> = {
+  pending: "確認待ち",
+  accepted: "返品承認",
+  rejected: "返品不成立",
+  expired: "期限超過",
+};
+const paymentLabels: Record<string, string> = {
+  COMPLETED: "支払済み",
+  FAILED: "支払い失敗",
+  CANCELED: "決済取消",
+  APPROVED: "決済確認中",
+  PENDING: "決済確認中",
+};
 export default async function AdminPage({
   searchParams,
 }: {
@@ -119,10 +132,15 @@ export default async function AdminPage({
                 <td>{formatDate(t.scheduled_charge_at)}</td>
                 <td>
                   {STATUS_LABELS[t.status]}
-                  {(t.manual_hold || t.billing_hold) && "（保留）"}
+                  {(t.manual_hold || t.billing_hold) &&
+                    !["cancelled", "return_accepted"].includes(t.status) &&
+                    "（保留）"}
                 </td>
-                <td>{t.return_review_status || "—"}</td>
-                <td>{t.payment_status || "未請求"}</td>
+                <td>
+                  {reviewLabels[t.return_review_status || ""] ||
+                    (t.status === "cancelled" ? "対応終了" : "—")}
+                </td>
+                <td>{paymentLabels[t.payment_status || ""] || "未請求"}</td>
                 <td>{t.box_included ? "同梱済" : "出荷確認待ち"}</td>
               </tr>
             ))}

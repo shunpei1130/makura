@@ -9,32 +9,51 @@ export default function BillingSwitch({
   environment: boolean;
 }) {
   const [message, setMessage] = useState("");
+  const [confirming, setConfirming] = useState(false);
+  const [busy, setBusy] = useState(false);
+  async function apply() {
+    setBusy(true);
+    try {
+      await post("/api/admin/billing", { enabled: !enabled });
+      location.reload();
+    } catch (e) {
+      setMessage((e as Error).message);
+      setBusy(false);
+    }
+  }
   return (
     <section className="notice">
       <p>
-        自動課金:{enabled && environment ? "有効" : "停止中"} ／ 環境変数:
-        {environment ? "有効" : "停止"}
+        自動課金:{enabled && environment ? "有効" : "停止中"} ／ 管理画面の設定:
+        {enabled ? "有効" : "停止"}
       </p>
-      <button
-        onClick={async () => {
-          if (
-            !confirm(
-              enabled
-                ? "自動課金を停止しますか？"
-                : "本番設定と検証を確認済みですか？ 自動課金を有効化します。",
-            )
-          )
-            return;
-          try {
-            await post("/api/admin/billing", { enabled: !enabled });
-            location.reload();
-          } catch (e) {
-            setMessage((e as Error).message);
-          }
-        }}
-      >
+      {!environment && (
+        <p>
+          公開設定で自動課金を停止しています。管理画面側を有効にしても、公開設定を変更するまでは請求されません。
+        </p>
+      )}
+      <button disabled={busy || confirming} onClick={() => setConfirming(true)}>
         {enabled ? "自動課金を緊急停止" : "自動課金を有効化"}
       </button>
+      {confirming && (
+        <section className="notice" aria-label="課金設定の確認">
+          <p>
+            {enabled
+              ? "自動課金を停止します。"
+              : "管理画面側の課金設定を有効にします。運用準備と試験は完了していますか？"}
+          </p>
+          <button disabled={busy} onClick={apply}>
+            変更を確定する
+          </button>
+          <button
+            className="secondary"
+            disabled={busy}
+            onClick={() => setConfirming(false)}
+          >
+            戻る
+          </button>
+        </section>
+      )}
       <p role="alert">{message}</p>
     </section>
   );

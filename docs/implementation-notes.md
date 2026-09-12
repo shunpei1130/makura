@@ -54,15 +54,15 @@
 2026-09-12:
 
 - PGliteによる自動テスト22件成功。301件の注文でも先頭300件に処理が停滞せず、残りの通知を次の実行で処理するケースを含む。
-- 同日の改修前21件は実Neon Sandbox PostgreSQLでも全件成功。同時実行による決済の排他も確認。
+- 同日の改修前21件は実Neon Sandbox PostgreSQLでも全件成功。同時実行による決済の排他も確認。追加した301注文の通知テストも実Neonで成功（139.52秒）。
 - 実Square Sandboxと実NeonでケースA〜Hの8件成功。カード保存、13,480円の実Sandbox決済、確定失敗の再試行、同時実行、期限境界を確認。メール送信はこのテストでは模擬送信。
 - ChromeからSquare公式JCB試験カードを使い、3Dセキュア認証→0円カード保存→申込完了→返品申請→追跡登録を確認。注文 `MG-90B56F07180A` は返送中・請求保留・未課金をDBで確認後、キャンセル済み。未送信の試験メールも停止済み。
 - マイグレーション0000・0001をSandboxとProductionに適用。Productionは注文0件、DB課金スイッチfalseで初期化。
 - `npm run typecheck`、`npm run build` 成功。`npm audit --omit=dev` は脆弱性0件。
 - Vercel Preview `dpl_Fo5uBSayhVEQhRyqsEfGiMB78m5i` がREADY。確認先: https://makura-trial-preview-shunpei1130s-projects.vercel.app 。本番への切替前に後続の変更も再デプロイする。
 - Square本番店舗 `LVC43F4M8J9XV`（夢重力マクラ）、Sandbox店舗 `L4V5KQZXMZGH5` のJP・JPY・カード処理対応を実APIで確認。
-- Squareのpayment.created/payment.updated通知先を本番とSandboxに作成。公開先の署名・到達確認までは無効。
-- Google Cloud専用プロジェクト `makura-trials` を作成。OAuthポリシーへの同意とクライアント作成は確認待ち。
+- Squareのpayment.created/payment.updated通知先を本番とSandboxに作成。Sandboxは有効化し、両イベントの実通知でHTTP 200とフィルター通過を確認。本番は公開確認前のため無効。
+- Google Cloud専用プロジェクト `makura-trials` に `Makura Admin Web` を作成。ユーザー承認を得てポリシー同意済み。管理者だけをテストユーザーに登録し、プレビューでGoogleログイン→注文一覧表示に成功。権限はopenid/emailのみ。
 - Resend通知用ドメインを作成。[必要なDNS設定](email-dns.md)の反映、送信キー、メール到達は未完了。
 
 本番公開、実メール到達、Googleログイン、本番の主要画面確認が完了するまでは実装全体の完了とはしない。本番受付・課金の環境変数はfalseで保持。
@@ -72,3 +72,7 @@
 カード登録画面のみ、本人認証先の銀行が任意のHTTPSドメインを利用できるようframe-srcとform-actionを設定。その他の画面では広げない。Sandboxの3DS先 `api.squareupsandbox.com` も許可し、Chromeで認証完了まで確認済み。
 
 PreviewのVercel認証は維持し、Squareの試験通知に専用の自動処理用秘密値を付ける。`SQUARE_WEBHOOK_URL` にはクエリも含めた正確な通知URLを機密値として保存し、そのURLと未加工本文でSquare署名を検証する。秘密値・URLをGit・文書・画面ログへ記載しない。
+
+申込・返品・カード更新・管理画面はAPP_URLのホストへ統一し、wwwや別のデプロイURLから開いてもCookieと送信元の検証が一致するようにする。
+
+GitHubの作業ブランチは `feat/zero-yen-30day-trial`、レビューは https://github.com/shunpei1130/makura/pull/1 （本番接続確認が残るためDraft）。

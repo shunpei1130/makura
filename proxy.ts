@@ -1,5 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 export function proxy(request: NextRequest) {
+  // Cookies, OAuth callbacks and CSRF checks all use the same configured host.
+  if (
+    ["preview", "production"].includes(process.env.VERCEL_ENV || "") &&
+    process.env.APP_URL
+  ) {
+    const canonical = new URL(process.env.APP_URL);
+    if (request.nextUrl.origin !== canonical.origin) {
+      const target = new URL(
+        request.nextUrl.pathname + request.nextUrl.search,
+        canonical,
+      );
+      const redirect = NextResponse.redirect(target);
+      redirect.headers.set("Referrer-Policy", "no-referrer");
+      redirect.headers.set("Cache-Control", "private, no-store");
+      return redirect;
+    }
+  }
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const dev = process.env.NODE_ENV === "development";
   const square =
