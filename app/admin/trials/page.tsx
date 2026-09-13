@@ -5,6 +5,7 @@ import { admin } from "@/lib/auth";
 import { getDb } from "@/lib/db/client";
 import { formatDate, STATUS_LABELS, type Trial } from "@/lib/trials/model";
 import BillingSwitch from "./switch";
+import PreviewEmailTest from "./preview-email-test";
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
 const filters: Record<string, { label: string; where: string }> = {
@@ -93,6 +94,10 @@ export default async function AdminPage({
         enabled={enabled}
         environment={process.env.AUTO_CHARGE_ENABLED === "true"}
       />
+      {process.env.VERCEL_ENV === "preview" &&
+      process.env.SQUARE_ENVIRONMENT === "sandbox" ? (
+        <PreviewEmailTest />
+      ) : null}
       <p>送信失敗メール:{mail}件</p>
       <nav className="filter-nav">
         {Object.entries(filters).map(([key, v]) => (

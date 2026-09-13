@@ -1,7 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { Resend } from "resend";
 import type { DB, Database } from "../db/client";
-import { appUrl, publicToken, required, seal, unseal } from "../security";
+import {
+  AppError,
+  appUrl,
+  publicToken,
+  required,
+  seal,
+  unseal,
+} from "../security";
 import { formatDate, type Trial } from "../trials/model";
 interface QueuedMail {
   id: string;
@@ -32,6 +39,22 @@ const deliver: MailSender = async (mail) => {
   if (r.error || !r.data?.id) throw new Error("EMAIL_PROVIDER_ERROR");
   return r.data.id;
 };
+export async function sendPreviewTestEmail(sender: MailSender = deliver) {
+  if (
+    process.env.VERCEL_ENV !== "preview" ||
+    process.env.SQUARE_ENVIRONMENT !== "sandbox"
+  )
+    throw new AppError("NOT_FOUND", 404);
+  const jstDate = new Date(Date.now() + 9 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10);
+  return sender({
+    id: `makura-preview-email-test-${jstDate}`,
+    to: "s.hasegawa1130@gmail.com",
+    subject: "夢重力マクラ｜メール送信テスト（Preview）",
+    text: "夢重力マクラのPreview環境から送信した管理者向けテストメールです。送信元とメール配信を確認するための通知で、実際の申込・注文・決済・発送は発生していません。",
+  });
+}
 function obsolete(row: QueuedMail, t: Trial) {
   const key = row.dedupe_key.slice(t.id.length + 1);
   if (key.startsWith("reminder:"))
