@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { PURCHASE_LINKS } from "@/lib/constants";
+import { CHECKOUT_LINKS } from "@/lib/constants";
 
 export type PillowQuizResult = {
   recommendation: "vertical" | "horizontal";
@@ -21,13 +21,13 @@ const recommendations = {
     name: "仰向け中心・縦向きタイプ",
     title: "あなたには「仰向け中心・縦向きタイプ」がおすすめです",
     image: "/makura/tate.png",
-    href: PURCHASE_LINKS.vertical,
+    href: CHECKOUT_LINKS.vertical,
   },
   horizontal: {
     name: "横向き中心・横向きタイプ",
     title: "あなたには「横向き中心・横向きタイプ」がおすすめです",
     image: "/makura/yoko.png",
-    href: PURCHASE_LINKS.horizontal,
+    href: CHECKOUT_LINKS.horizontal,
   },
 } as const;
 
@@ -58,13 +58,15 @@ export default function PillowQuiz() {
 
     let reasonText = "";
     if (isVertical) {
-      reasonText = answers.position === "back" 
-        ? "仰向けで寝ることが多く、首・頭のフィット感と安定感を重視されているため。"
-        : "仰向けの安定感と頚椎のサポートを高めたい好みに合致するため。";
+      reasonText =
+        answers.position === "back"
+          ? "仰向けで寝ることが多く、首・頭のフィット感と安定感を重視されているため。"
+          : "仰向けの安定感と頚椎のサポートを高めたい好みに合致するため。";
     } else {
-      reasonText = answers.position === "side"
-        ? "横向きで寝ることが多く、肩・首まわりの高さと空間を支える必要があるため。"
-        : "横向き時の肩への負担軽減や横幅のサポートを重視されているため。";
+      reasonText =
+        answers.position === "side"
+          ? "横向きで寝ることが多く、肩・首まわりの高さと空間を支える必要があるため。"
+          : "横向き時の肩への負担軽減や横幅のサポートを重視されているため。";
     }
 
     const nextResult: PillowQuizResult = {
@@ -78,7 +80,10 @@ export default function PillowQuiz() {
     };
 
     setResult(nextResult);
-    window.setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
+    window.setTimeout(
+      () => resultRef.current?.scrollIntoView({ behavior: "smooth" }),
+      50,
+    );
   }
 
   const rec = result ? recommendations[result.recommendation] : null;
@@ -89,27 +94,53 @@ export default function PillowQuiz() {
         <div className="legacy-section-heading legacy-section-heading-center">
           <p className="legacy-kicker">3 QUESTIONS QUIZ</p>
           <h2>3問で簡易診断</h2>
-          <p>どっちのタイプが良いか迷った方へ。3つの質問からあなたに合うタイプを提案します。</p>
+          <p>
+            どっちのタイプが良いか迷った方へ。3つの質問からあなたに合うタイプを提案します。
+          </p>
         </div>
 
-        <form className="legacy-quiz" onSubmit={handleSubmit} style={{ maxWidth: "600px", margin: "0 auto" }}>
+        <form
+          className="legacy-quiz"
+          onSubmit={handleSubmit}
+          style={{ maxWidth: "600px", margin: "0 auto" }}
+        >
           <fieldset style={{ marginBottom: "2rem" }}>
-            <legend style={{ fontSize: "1.05rem", fontWeight: "bold", color: "#ffd700", marginBottom: "1rem" }}>
+            <legend
+              style={{
+                fontSize: "1.05rem",
+                fontWeight: "bold",
+                color: "#ffd700",
+                marginBottom: "1rem",
+              }}
+            >
               Q1. 普段の寝姿勢は？
             </legend>
-            <div className="legacy-option-grid quiz-option-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.8rem" }}>
+            <div
+              className="legacy-option-grid quiz-option-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "0.8rem",
+              }}
+            >
               {[
                 { value: "back", label: "仰向けが多い" },
                 { value: "side", label: "横向きが多い" },
                 { value: "both", label: "半々" },
               ].map((opt) => (
-                <label className="legacy-option" key={opt.value} style={{ cursor: "pointer" }}>
+                <label
+                  className="legacy-option"
+                  key={opt.value}
+                  style={{ cursor: "pointer" }}
+                >
                   <input
                     type="radio"
                     name="position"
                     value={opt.value}
                     checked={answers.position === opt.value}
-                    onChange={() => chooseAnswer("position", opt.value as Answers["position"])}
+                    onChange={() =>
+                      chooseAnswer("position", opt.value as Answers["position"])
+                    }
                     required
                   />
                   <span>{opt.label}</span>
@@ -119,22 +150,42 @@ export default function PillowQuiz() {
           </fieldset>
 
           <fieldset style={{ marginBottom: "2rem" }}>
-            <legend style={{ fontSize: "1.05rem", fontWeight: "bold", color: "#ffd700", marginBottom: "1rem" }}>
+            <legend
+              style={{
+                fontSize: "1.05rem",
+                fontWeight: "bold",
+                color: "#ffd700",
+                marginBottom: "1rem",
+              }}
+            >
               Q2. 枕の高さは？
             </legend>
-            <div className="legacy-option-grid quiz-option-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.8rem" }}>
+            <div
+              className="legacy-option-grid quiz-option-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "0.8rem",
+              }}
+            >
               {[
                 { value: "low", label: "低め" },
                 { value: "normal", label: "普通" },
                 { value: "high", label: "高め" },
               ].map((opt) => (
-                <label className="legacy-option" key={opt.value} style={{ cursor: "pointer" }}>
+                <label
+                  className="legacy-option"
+                  key={opt.value}
+                  style={{ cursor: "pointer" }}
+                >
                   <input
                     type="radio"
                     name="height"
                     value={opt.value}
                     checked={answers.height === opt.value}
-                    onChange={() => chooseAnswer("height", opt.value as Answers["height"])}
+                    onChange={() =>
+                      chooseAnswer("height", opt.value as Answers["height"])
+                    }
                     required
                   />
                   <span>{opt.label}</span>
@@ -144,21 +195,41 @@ export default function PillowQuiz() {
           </fieldset>
 
           <fieldset style={{ marginBottom: "2.5rem" }}>
-            <legend style={{ fontSize: "1.05rem", fontWeight: "bold", color: "#ffd700", marginBottom: "1rem" }}>
+            <legend
+              style={{
+                fontSize: "1.05rem",
+                fontWeight: "bold",
+                color: "#ffd700",
+                marginBottom: "1rem",
+              }}
+            >
               Q3. どちらを重視する？
             </legend>
-            <div className="legacy-option-grid quiz-option-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.8rem" }}>
+            <div
+              className="legacy-option-grid quiz-option-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: "0.8rem",
+              }}
+            >
               {[
                 { value: "stability", label: "仰向けの安定感" },
                 { value: "shoulder", label: "横向き時の肩・首まわり" },
               ].map((opt) => (
-                <label className="legacy-option" key={opt.value} style={{ cursor: "pointer" }}>
+                <label
+                  className="legacy-option"
+                  key={opt.value}
+                  style={{ cursor: "pointer" }}
+                >
                   <input
                     type="radio"
                     name="priority"
                     value={opt.value}
                     checked={answers.priority === opt.value}
-                    onChange={() => chooseAnswer("priority", opt.value as Answers["priority"])}
+                    onChange={() =>
+                      chooseAnswer("priority", opt.value as Answers["priority"])
+                    }
                     required
                   />
                   <span>{opt.label}</span>
@@ -167,8 +238,8 @@ export default function PillowQuiz() {
             </div>
           </fieldset>
 
-          <button 
-            className="legacy-quiz-submit mobile-full-width" 
+          <button
+            className="legacy-quiz-submit mobile-full-width"
             type="submit"
             style={{
               width: "100%",
@@ -179,7 +250,7 @@ export default function PillowQuiz() {
               color: "#111",
               borderRadius: "30px",
               border: "none",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             診断結果を見る <span>→</span>
@@ -187,9 +258,9 @@ export default function PillowQuiz() {
         </form>
 
         {result && rec && (
-          <div 
-            className="legacy-quiz-result" 
-            ref={resultRef} 
+          <div
+            className="legacy-quiz-result"
+            ref={resultRef}
             tabIndex={-1}
             style={{
               marginTop: "2.5rem",
@@ -203,43 +274,75 @@ export default function PillowQuiz() {
               gap: "1.5rem",
               maxWidth: "750px",
               margin: "2.5rem auto 0",
-              flexWrap: "wrap"
+              flexWrap: "wrap",
             }}
           >
-            <div className="legacy-quiz-result-image" style={{ width: "180px", margin: "0 auto" }}>
-              <Image src={rec.image} alt={rec.name} width={180} height={180} style={{ objectFit: "contain" }} />
+            <div
+              className="legacy-quiz-result-image"
+              style={{ width: "180px", margin: "0 auto" }}
+            >
+              <Image
+                src={rec.image}
+                alt={rec.name}
+                width={180}
+                height={180}
+                style={{ objectFit: "contain" }}
+              />
             </div>
-            <div className="legacy-quiz-result-copy" style={{ flex: 1, minWidth: "240px", textAlign: "center" }}>
-              <p className="legacy-kicker" style={{ color: "#ffd700", fontWeight: "bold" }}>DIAGNOSIS RESULT</p>
-              <h3 style={{ fontSize: "1.2rem", margin: "0.4rem 0 0.8rem", color: "#fff" }}>{rec.title}</h3>
-              <p style={{ fontSize: "0.9rem", opacity: 0.9, lineHeight: 1.6, marginBottom: "1.2rem" }}>
-                <strong>理由：</strong>{result.reason}
+            <div
+              className="legacy-quiz-result-copy"
+              style={{ flex: 1, minWidth: "240px", textAlign: "center" }}
+            >
+              <p
+                className="legacy-kicker"
+                style={{ color: "#ffd700", fontWeight: "bold" }}
+              >
+                DIAGNOSIS RESULT
               </p>
-              <a 
-                href={rec.href} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <h3
+                style={{
+                  fontSize: "1.2rem",
+                  margin: "0.4rem 0 0.8rem",
+                  color: "#fff",
+                }}
+              >
+                {rec.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  opacity: 0.9,
+                  lineHeight: 1.6,
+                  marginBottom: "1.2rem",
+                }}
+              >
+                <strong>理由：</strong>
+                {result.reason}
+              </p>
+              <a
+                href={rec.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="legacy-quiz-purchase mobile-full-width"
                 style={{
                   display: "inline-block",
                   padding: "0.85rem 1.5rem",
-                  background: "linear-gradient(135deg, #ffd700 0%, #ffa500 100%)",
+                  background:
+                    "linear-gradient(135deg, #ffd700 0%, #ffa500 100%)",
                   color: "#111",
                   fontWeight: "bold",
                   borderRadius: "30px",
                   textDecoration: "none",
                   boxShadow: "0 4px 15px rgba(255,215,0,0.3)",
-                  boxSizing: "border-box"
+                  boxSizing: "border-box",
                 }}
               >
-                このタイプを30日試す →
+                0円で30日試す →
               </a>
             </div>
           </div>
         )}
-
       </div>
     </section>
   );
 }
-

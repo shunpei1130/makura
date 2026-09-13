@@ -1,0 +1,151 @@
+import {
+  pgTable,
+  text,
+  uuid,
+  integer,
+  boolean,
+  timestamp,
+  jsonb,
+  uniqueIndex,
+  index,
+  check,
+} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+const time = (name: string) => timestamp(name, { withTimezone: true });
+export const trials = pgTable(
+  "trial_orders",
+  {
+    id: uuid("id").primaryKey(),
+    order_number: text("order_number").notNull().unique(),
+    public_token_hash: text("public_token_hash").notNull().unique(),
+    checkout_key: uuid("checkout_key").notNull().unique(),
+    product_type: text("product_type").notNull(),
+    product_name: text("product_name").notNull(),
+    amount_jpy: integer("amount_jpy").notNull().default(13480),
+    customer_name: text("customer_name").notNull(),
+    email: text("email").notNull(),
+    phone: text("phone").notNull(),
+    postal_code: text("postal_code").notNull(),
+    address1: text("address1").notNull(),
+    address2: text("address2").notNull().default(""),
+    square_customer_id: text("square_customer_id").notNull(),
+    square_card_id: text("square_card_id").notNull(),
+    status: text("status").notNull().default("trial_active"),
+    trial_started_at: time("trial_started_at").notNull(),
+    return_request_deadline: time("return_request_deadline").notNull(),
+    scheduled_charge_at: time("scheduled_charge_at").notNull(),
+    return_requested_at: time("return_requested_at"),
+    return_ship_deadline: time("return_ship_deadline"),
+    return_tracking_number: text("return_tracking_number"),
+    return_carrier: text("return_carrier"),
+    return_shipped_at: time("return_shipped_at"),
+    return_delivered_at: time("return_delivered_at"),
+    return_received_at: time("return_received_at"),
+    box_included: boolean("box_included").notNull().default(false),
+    pillow_packed: boolean("pillow_packed").notNull().default(false),
+    guide_packed: boolean("guide_packed").notNull().default(false),
+    shipped_at: time("shipped_at"),
+    outbound_tracking: text("outbound_tracking"),
+    pillow_returned: boolean("pillow_returned").notNull().default(false),
+    box_returned: boolean("box_returned").notNull().default(false),
+    box_requirement_waived: boolean("box_requirement_waived")
+      .notNull()
+      .default(false),
+    return_review_status: text("return_review_status"),
+    return_reject_reason: text("return_reject_reason"),
+    return_rejection_notified_at: time("return_rejection_notified_at"),
+    redelivery_tracking: text("redelivery_tracking"),
+    billing_hold: boolean("billing_hold").notNull().default(false),
+    billing_hold_reason: text("billing_hold_reason"),
+    manual_hold: boolean("manual_hold").notNull().default(false),
+    square_payment_id: text("square_payment_id").unique(),
+    payment_status: text("payment_status"),
+    charged_at: time("charged_at"),
+    retry_count: integer("retry_count").notNull().default(0),
+    next_retry_at: time("next_retry_at"),
+    first_charge_at: time("first_charge_at"),
+    consent_version: text("consent_version").notNull(),
+    consented_at: time("consented_at").notNull(),
+    grace_notified_at: time("grace_notified_at"),
+    grace_deadline: time("grace_deadline"),
+    created_at: time("created_at").notNull().defaultNow(),
+    updated_at: time("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    index("trial_due_idx").on(t.scheduled_charge_at, t.status),
+    check("trial_amount_check", sql`${t.amount_jpy} = 13480`),
+    check(
+      "trial_type_check",
+      sql`${t.product_type} in ('vertical','horizontal')`,
+    ),
+  ],
+);
+export const attempts = pgTable(
+  "payment_attempts",
+  {
+    id: uuid("id").primaryKey(),
+    trial_order_id: uuid("trial_order_id")
+      .notNull()
+      .references(() => trials.id),
+    attempt_number: integer("attempt_number").notNull(),
+    square_payment_id: text("square_payment_id").unique(),
+    idempotency_key: text("idempotency_key").notNull().unique(),
+    source_card_id: text("source_card_id").notNull(),
+    amount_jpy: integer("amount_jpy").notNull(),
+    status: text("status").notNull(),
+    error_code: text("error_code"),
+    created_at: time("created_at").notNull().defaultNow(),
+    updated_at: time("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("attempt_order_number").on(t.trial_order_id, t.attempt_number),
+  ],
+);
+export const audit = pgTable("audit_events", {
+  id: uuid("id").primaryKey(),
+  trial_order_id: uuid("trial_order_id").references(() => trials.id),
+  actor_type: text("actor_type").notNull(),
+  actor_id: text("actor_id").notNull(),
+  event_type: text("event_type").notNull(),
+  before_json: jsonb("before_json"),
+  after_json: jsonb("after_json"),
+  created_at: time("created_at").notNull().defaultNow(),
+});
+export const outbox = pgTable("email_outbox", {
+  id: uuid("id").primaryKey(),
+  trial_order_id: uuid("trial_order_id").references(() => trials.id),
+  dedupe_key: text("dedupe_key").notNull().unique(),
+  kind: text("kind").notNull(),
+  recipient: text("recipient").notNull(),
+  subject: text("subject").notNull(),
+  body_encrypted: text("body_encrypted").notNull(),
+  sent_at: time("sent_at"),
+  canceled_at: time("canceled_at"),
+  attempts: integer("attempts").notNull().default(0),
+  next_attempt_at: time("next_attempt_at").notNull().defaultNow(),
+  provider_id: text("provider_id"),
+  last_error: text("last_error"),
+  created_at: time("created_at").notNull().defaultNow(),
+});
+export const webhooks = pgTable("webhook_events", {
+  event_id: text("event_id").primaryKey(),
+  created_at: time("created_at").notNull().defaultNow(),
+});
+export const rateLimits = pgTable("rate_limits", {
+  key: text("key").primaryKey(),
+  count: integer("count").notNull(),
+  expires_at: time("expires_at").notNull(),
+});
+export const checkoutIntents = pgTable("checkout_intents", {
+  key: uuid("key").primaryKey(),
+  input_hash: text("input_hash").notNull(),
+  customer_id: text("customer_id"),
+  card_id: text("card_id"),
+  token_hash: text("token_hash"),
+  created_at: time("created_at").notNull().defaultNow(),
+});
+export const controls = pgTable("system_controls", {
+  key: text("key").primaryKey(),
+  enabled: boolean("enabled").notNull().default(false),
+  updated_at: time("updated_at").notNull().defaultNow(),
+});
