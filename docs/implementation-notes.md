@@ -51,6 +51,13 @@
 
 ## 検証記録
 
+2026-09-13:
+
+- Preview最新コミット `d91509c` はVercelでReady。`makura-trial-preview-shunpei1130s-projects.vercel.app` をこのデプロイに割り当て、Previewの管理画面にテスト送信機能が表示されることを確認。
+- Resendドメイン `notify.zero-g-makura.com` はVerified。Previewから管理者宛てに1通送信し、ResendでDeliveredを確認。Resend APIキーと送信元はVercel Preview・Productionに登録済み。
+- Productionの `CHECKOUT_ENABLED=false`、`AUTO_CHARGE_ENABLED=false`、DB課金スイッチfalseを維持。Production Square Webhookは未有効・未検証。本番コードの反映後に `payment.created` と `payment.updated` の通知を確認する。
+- 最新Preview追加後の自動テスト26件、`npm run typecheck`、`npm run build` が成功。
+
 2026-09-12:
 
 - PGliteによる自動テスト22件成功。301件の注文でも先頭300件に処理が停滞せず、残りの通知を次の実行で処理するケースを含む。
@@ -59,13 +66,13 @@
 - ChromeからSquare公式JCB試験カードを使い、3Dセキュア認証→0円カード保存→申込完了→返品申請→追跡登録を確認。注文 `MG-90B56F07180A` は返送中・請求保留・未課金をDBで確認後、キャンセル済み。未送信の試験メールも停止済み。
 - マイグレーション0000・0001をSandboxとProductionに適用。Productionは注文0件、DB課金スイッチfalseで初期化。
 - `npm run typecheck`、`npm run build` 成功。`npm audit --omit=dev` は脆弱性0件。
-- Vercel Preview `dpl_Fo5uBSayhVEQhRyqsEfGiMB78m5i` がREADY。確認先: https://makura-trial-preview-shunpei1130s-projects.vercel.app 。本番への切替前に後続の変更も再デプロイする。
+- 当日時点のVercel Preview `dpl_Fo5uBSayhVEQhRyqsEfGiMB78m5i` がREADY。確認先: https://makura-trial-preview-shunpei1130s-projects.vercel.app 。後続コミットは2026-09-13の記録を参照。
 - Square本番店舗 `LVC43F4M8J9XV`（夢重力マクラ）、Sandbox店舗 `L4V5KQZXMZGH5` のJP・JPY・カード処理対応を実APIで確認。
 - Squareのpayment.created/payment.updated通知先を本番とSandboxに作成。Sandboxは有効化し、両イベントの実通知でHTTP 200とフィルター通過を確認。本番は公開確認前のため無効。
 - Google Cloud専用プロジェクト `makura-trials` に `Makura Admin Web` を作成。ユーザー承認を得てポリシー同意済み。管理者だけをテストユーザーに登録し、プレビューでGoogleログイン→注文一覧表示に成功。権限はopenid/emailのみ。
-- Resend通知用ドメインを作成。[必要なDNS設定](email-dns.md)の反映、送信キー、メール到達は未完了。
+- Resend通知用ドメインを作成。DNS反映・送信キー・Previewメール到達の確認は2026-09-13の記録を参照。
 
-本番公開、実メール到達、Googleログイン、本番の主要画面確認が完了するまでは実装全体の完了とはしない。本番受付・課金の環境変数はfalseで保持。
+本番Webhookと本番画面・カード登録/3DSの確認が完了するまでは、本番の新規受付・自動課金を開始しない。`CHECKOUT_ENABLED`、`AUTO_CHARGE_ENABLED` とDB課金スイッチは、確認と運用者の開始判断が済むまでfalseで保持する。
 
 ## 接続制限と通知URL
 
